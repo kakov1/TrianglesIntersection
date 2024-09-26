@@ -5,13 +5,13 @@
 #include <cmath>
 
 bool Plane::is_equal(const Plane& plane) const {
-    if (is_parallel(plane)) {
+    if (is_collinear(plane)) {
         return is_equal_floats(d, plane.d);
     }
     return false;
 }
 
-bool Plane::is_parallel(const Plane& plane) const {
+bool Plane::is_collinear(const Plane& plane) const {
     return normal.is_collinear(plane.normal);
 }
 

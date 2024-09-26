@@ -23,5 +23,5 @@ class Triangle {
         bool is_intersect_in_same_plane(const Triangle& triangle) const;
         bool is_in_same_half_plane(const Plane& plane) const;
         bool overlap_method(const Triangle& triangle);
-        Segment line_in_same_plane_intersection(const Line& line) const;
+        Segment intersection_line_in_same_plane(const Line& line) const;
 };

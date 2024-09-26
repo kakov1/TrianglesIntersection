@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test.dir/test.cpp.o CMakeFiles/test.dir/point.cpp.o CMakeFiles/test.dir/plane.cpp.o CMakeFiles/test.dir/tools.cpp.o CMakeFiles/test.dir/vector.cpp.o CMakeFiles/test.dir/segment.cpp.o CMakeFiles/test.dir/line.cpp.o CMakeFiles/test.dir/triangle.cpp.o -o test 

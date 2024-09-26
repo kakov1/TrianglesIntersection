@@ -1,23 +1,32 @@
 #include "plane.hpp"
 #include "tools.hpp"
 #include "line.hpp"
+#include "triangle.hpp"
+#include <vector>
 #include <iostream>
 
 int main() {
-    Point point1(1, 2, 3);
-    Point point2(2, 1, 0);
-    Point point3(1, 0, 2);
-    Point point4(2, 3, 0);
-    Line line1(point1, point2);
-    Line line2(point3, point4);
+    size_t triangles_number;
+    std::cin >> triangles_number;
+    std::vector<Triangle> triangles;
 
-    line1.start_point.print();
-    line1.direction_vector.print();
-    line2.start_point.print();
-    line2.direction_vector.print();
 
-    Point a = line1.lines_intersection(line2);
-    a.print();
+    for (int i = 0; i < triangles_number; i++) {
+        float x1, y1, z1, x2, y2, z2, x3, y3, z3;
+        std::cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2 >> x3 >> y3 >> z3;
+        Point point1(x1, y1, z1);
+        Point point2(x2, y2, z2);
+        Point point3(x3, y3, z3);
+        triangles.emplace_back(point1, point2, point3);
+    }
+
+    for (int i = 0; i < triangles_number; i++) {
+        for (int j = i; j < triangles_number; j++) {
+            if (triangles[i].is_intersect(triangles[j])) {
+                std::cout << i  << std::endl;
+            }
+        }
+    }
 
     return 0;
 }

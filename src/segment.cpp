@@ -46,3 +46,31 @@ bool Segment::is_point_belong(const Point& point) const {
 bool Segment::is_valid() const {
     return (start_point.is_valid() && end_point.is_valid() && !start_point.is_equal(end_point));
 }
+
+Point Segment::segments_intersection(const Segment& segment) const {
+    std::pair<float, float> params_of_intersection = 
+    solve_system_3eq_2var({start_point.x - end_point.x,
+                           segment.end_point.x - segment.start_point.x,
+                           segment.end_point.x - end_point.x},
+                          {start_point.y - end_point.y,
+                           segment.end_point.y - segment.start_point.y,
+                           segment.end_point.y - end_point.y},
+                          {start_point.z - end_point.z,
+                           segment.end_point.z - segment.start_point.z,
+                           segment.end_point.z - end_point.z}
+                         );
+    
+    if (is_nan_solution(params_of_intersection)) {
+        return NAN_POINT;
+    }
+    else if (is_inf_solution(params_of_intersection)) {
+        return INFINITY_POINT;
+    }
+    else {
+        float param = params_of_intersection.first;
+        return {param * start_point.x + (1-param)*end_point.x,
+                param * start_point.y + (1-param)*end_point.y,
+                param * start_point.z + (1-param)*end_point.z,
+               };
+    }
+}

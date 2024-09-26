@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/segment.cpp.o.d"
   "CMakeFiles/main.dir/tools.cpp.o"
   "CMakeFiles/main.dir/tools.cpp.o.d"
+  "CMakeFiles/main.dir/triangle.cpp.o"
+  "CMakeFiles/main.dir/triangle.cpp.o.d"
   "CMakeFiles/main.dir/vector.cpp.o"
   "CMakeFiles/main.dir/vector.cpp.o.d"
   "main"

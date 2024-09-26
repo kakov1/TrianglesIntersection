@@ -93,4 +93,6 @@ CMakeFiles/main.dir/tools.cpp.o: \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/vector.hpp
+ /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/vector.hpp \
+ /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/initializer_list

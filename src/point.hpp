@@ -15,4 +15,5 @@ class Point {
         void print() const;
         bool is_equal(const Point& point) const;
         bool is_valid() const;
+        bool is_nan() const; 
 };

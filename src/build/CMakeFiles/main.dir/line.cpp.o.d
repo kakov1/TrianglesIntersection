@@ -95,6 +95,8 @@ CMakeFiles/main.dir/line.cpp.o: \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/vector.hpp \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/tools.hpp \
+ /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/initializer_list \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/segment.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
@@ -146,7 +148,7 @@ CMakeFiles/main.dir/line.cpp.o: \
  /usr/include/c++/11/backward/binders.h \
  /usr/include/c++/11/bits/stl_algo.h /usr/include/c++/11/cstdlib \
  /usr/include/c++/11/bits/algorithmfwd.h \
- /usr/include/c++/11/initializer_list /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/stl_heap.h \
  /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/uniform_int_dist.h \
  /usr/include/c++/11/bits/range_access.h \

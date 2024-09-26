@@ -15,52 +15,26 @@ bool Line::is_parallel(const Line& line) const {
 
 
 Point Line::lines_intersection(const Line& line) const {
-    if (is_parallel(line) && !is_equal(line)) {
+    std::pair<float, float> params_of_intersection = 
+    solve_system_3eq_2var({direction_vector.x, -line.direction_vector.x,
+                           line.start_point.x - start_point.x},
+                           {direction_vector.y, -line.direction_vector.y,
+                           line.start_point.y - start_point.y},
+                           {direction_vector.z, -line.direction_vector.z,
+                           line.start_point.z - start_point.z}
+                         );
+    
+    if (is_nan_solution(params_of_intersection)) {
         return NAN_POINT;
     }
-    if (direction_vector.is_skew(line.direction_vector)) {
-        return NAN_POINT;
-    }
-    if (is_equal(line)) {
+    else if (is_inf_solution(params_of_intersection)) {
         return INFINITY_POINT;
     }
-
-    float main_det_xy = det_two(direction_vector.x, -line.direction_vector.x, 
-                                direction_vector.y, -line.direction_vector.y);
-    float main_det_yz = det_two(direction_vector.y, -line.direction_vector.y, 
-                                direction_vector.z, -line.direction_vector.z);
-    float main_det_xz = det_two(direction_vector.x, -line.direction_vector.x, 
-                                direction_vector.z, -line.direction_vector.z);
-    
-    std::cout << main_det_xy << " " << main_det_xz << " " << main_det_yz << std::endl;
-    if (is_equal_floats(main_det_xy, 0) && is_equal_floats(main_det_xz, 0)&& is_equal_floats(main_det_yz, 0)) {
-        return NAN_POINT;
-    }
     else {
-        float main_det;
-        float compl_det;
-        if (!is_equal_floats(main_det_xy, 0)) {
-            main_det = main_det_xy;
-            compl_det = det_two(line.start_point.x - start_point.x, -line.direction_vector.x,
-                                line.start_point.y - start_point.y, -line.direction_vector.y);
-        }               
-        else if (!is_equal_floats(main_det_xz, 0)) {
-            main_det = main_det_xz;
-            compl_det = det_two(line.start_point.x - start_point.x, -line.direction_vector.x,
-                                line.start_point.z - start_point.z, -line.direction_vector.z);
-        }
-        else if (!is_equal_floats(main_det_yz, 0)) {
-            main_det = main_det_yz;
-            compl_det = det_two(line.start_point.y - start_point.y, -line.direction_vector.y,
-                                line.start_point.z - start_point.z, -line.direction_vector.z);
-        }
-        else {
-            assert("ERROR INTERSECTION");
-        }
-        float t = compl_det/main_det;
-        return {start_point.x + direction_vector.x * t,
-                start_point.y + direction_vector.y * t,
-                start_point.z + direction_vector.z * t};
+        return {start_point.x + params_of_intersection.first*direction_vector.x,
+                start_point.y + params_of_intersection.first*direction_vector.y,
+                start_point.z + params_of_intersection.first*direction_vector.z,
+               };
     }
 }   
 

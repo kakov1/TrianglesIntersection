@@ -1,15 +1,16 @@
+#include "line.hpp"
 #include <iostream>
+#include <utility>
+#include <cmath>
 
 int main() {
-    int number = 5;       // Обычная переменная
-    int &refNumber = number; // Ссылка на переменную number
 
-    int newNumber = refNumber; // Создаем новую переменную и присваиваем ей значение ссылки
+    Line line1 = {Point(2, 1, 0), Point(2, -3, 1)};
+    Line line2 = {Point(2, 2, 0), Point(2, 1, 1)};
 
-    refNumber = 10; // Изменяем значение через ссылку
-
-    std::cout << "Original number: " << number << std::endl; // Выводит 10
-    std::cout << "New number: " << newNumber << std::endl;   // Выводит 5
+    Point inter = line1.lines_intersection(line2);
+    
+    inter.print();
 
     return 0;
 }

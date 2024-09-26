@@ -66,11 +66,7 @@ bool Vector::is_collinear(const Vector& vector) const {
 }
 
 bool Vector::is_skew(const Vector& vector) const {
-    Vector connection_origins = {x - vector.x,
-                                 y - vector.y,
-                                 z - vector.z};
-
-    return triple_product(vector, connection_origins) == 0;
+    return triple_product(vector, {x, y, z}) == 0;
 }
 
 float Vector::scalar_product(const Vector& vector) const {

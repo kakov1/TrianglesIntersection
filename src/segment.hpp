@@ -1,3 +1,5 @@
+#pragma once
+
 #include "point.hpp"
 #include "vector.hpp"
 
@@ -21,4 +23,5 @@ class Segment {
         bool is_valid() const;
         bool is_on_same_line(const Segment& segment) const;
         float distance_between_lines(const Segment& segment) const;
+        Point segments_intersection(const Segment& segment) const;
 };
