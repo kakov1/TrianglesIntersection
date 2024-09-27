@@ -3,14 +3,16 @@
 #include "point.hpp"
 #include <cmath>
 
+class Plane;
+
 class Vector {
     public:
-        float x = NAN;
-        float y = NAN;
-        float z = NAN;
+        double x = NAN;
+        double y = NAN;
+        double z = NAN;
 
         Vector() {}
-        Vector(float coord_x, float coord_y, float coord_z) {
+        Vector(double coord_x, double coord_y, double coord_z) {
             x = coord_x;
             y = coord_y;
             z = coord_z;
@@ -25,16 +27,17 @@ class Vector {
         bool is_equal(const Vector& vector) const;
         Vector opposite() const;
         int normalize();
-        float scalar_product(const Vector& vector) const;
+        double scalar_product(const Vector& vector) const;
         Vector vector_product(const Vector& vector) const;
-        float triple_product(const Vector& a, const Vector& b) const;
-        float vector_module() const;
+        double triple_product(const Vector& a, const Vector& b) const;
+        double vector_module() const;
         bool is_collinear(const Vector& vector) const;
         bool is_skew(const Vector& vector) const;
+        Vector find_perp_in_plane(const Plane& plane) const;
         Vector operator+(Vector vector) const;
-        Vector operator*(float number) const;
-        Vector operator/(float number) const;
+        Vector operator*(double number) const;
+        Vector operator/(double number) const;
 };
 
-Vector operator*(float number, const Vector& vector);
-Vector operator/(float number, const Vector& vector);
+Vector operator*(double number, const Vector& vector);
+Vector operator/(double number, const Vector& vector);

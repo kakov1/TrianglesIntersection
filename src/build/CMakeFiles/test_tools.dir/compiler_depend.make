@@ -700,9 +700,13 @@ CMakeFiles/test_tools.dir/vector.cpp.o: ../vector.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  ../plane.hpp \
+  ../line.hpp \
   /usr/include/c++/11/cassert \
   /usr/include/assert.h
 
+
+../line.hpp:
 
 /usr/include/c++/11/bits/vector.tcc:
 
@@ -817,6 +821,8 @@ CMakeFiles/test_tools.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
+
+../plane.hpp:
 
 /usr/include/sched.h:
 

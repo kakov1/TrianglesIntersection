@@ -3,9 +3,9 @@
 #include <cmath>
 
 bool Point::is_equal(const Point& point) const{
-    return (is_equal_floats(x, point.x) &&
-           is_equal_floats(y, point.y) &&
-           is_equal_floats(z, point.z) ||
+    return (is_equal_doubles(x, point.x) &&
+           is_equal_doubles(y, point.y) &&
+           is_equal_doubles(z, point.z) ||
            (is_nan() && point.is_nan()));
 }
 

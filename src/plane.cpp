@@ -6,7 +6,7 @@
 
 bool Plane::is_equal(const Plane& plane) const {
     if (is_collinear(plane)) {
-        return is_equal_floats(d, plane.d);
+        return is_equal_doubles(d, plane.d);
     }
     return false;
 }
@@ -16,7 +16,7 @@ bool Plane::is_collinear(const Plane& plane) const {
 }
 
 int Plane::normalize() {
-    float coefficient = d;
+    double coefficient = d;
 
     normal.x /= coefficient;
     normal.y /= coefficient;
@@ -34,13 +34,13 @@ void Plane::print() const {
 }
 
 bool Plane::is_point_over_plane(const Point& point) const {
-    float result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
-    return (result > 0 && !is_equal_floats(result, 0));
+    double result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
+    return (result > 0 && !is_equal_doubles(result, 0));
 }
 
 bool Plane::is_point_under_plane(const Point& point) const {
-    float result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
-    return (result < 0 && !is_equal_floats(result, 0));
+    double result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
+    return (result < 0 && !is_equal_doubles(result, 0));
 }
 
 Line Plane::intersection(const Plane& plane) const {
@@ -53,11 +53,11 @@ Line Plane::intersection(const Plane& plane) const {
     } 
 
     result.direction_vector = n;
-    float a, b;
+    double a, b;
 
-    float normals_scalar_product = normal.scalar_product(plane.normal);
-    float normal1_length_sqr = normal.scalar_product(normal);
-    float normal2_length_sqr = plane.normal.scalar_product(plane.normal);
+    double normals_scalar_product = normal.scalar_product(plane.normal);
+    double normal1_length_sqr = normal.scalar_product(normal);
+    double normal2_length_sqr = plane.normal.scalar_product(plane.normal);
 
     a = (d * normal2_length_sqr - plane.d * normals_scalar_product) /
         (pow(normals_scalar_product, 2) - normal1_length_sqr*normal2_length_sqr);

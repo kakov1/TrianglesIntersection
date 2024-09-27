@@ -26,5 +26,5 @@ class Line {
         void print() const;
         //bool is_valid() const;
         //bool is_on_same_line(const Segment& segment) const;
-        //float distance_between_lines(const Segment& segment) const;
+        //double distance_between_lines(const Segment& segment) const;
 };

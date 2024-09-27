@@ -6,10 +6,10 @@
 #include <vector>
 
 int main() {
-    Plane plane1 = Plane({10, 15, 20}, 3);
-    Plane plane2 = Plane({10, 15, 16}, 3);
+    Plane plane = Plane({10, 15, 20}, 3);
+    Vector vector = Vector(-6, 9, 2);
 
-    plane1.intersection(plane2).print();
+    vector.find_perp_in_plane(plane).print();
 
     return 0;
 }

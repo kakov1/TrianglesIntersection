@@ -1,0 +1,78 @@
+Point Triangle::get_vertice(int number) const {
+    if (number == 0) {
+        return a;
+    }
+    else if(number == 1) {
+        return b;
+    }
+    else if(number == 2) {
+        return c;
+    }
+    else {
+        return NAN_POINT;
+    }
+}
+
+int Triangle::get_middle_index(int index1, int index2) const {
+    if (index1 < index2) {
+        return (index1 + index2) / 2;
+    }
+    else {
+        return ((index1 + index2 + 3) / 2) % 3;
+    }
+}
+
+int Triangle::get_extreme_index(Point point) const {
+    int mid, next, prev, index1 = 0, index2 = 0;
+    Vector side;
+    while (true) {
+        mid = get_middle_index(index1, index2); 
+        next = (mid + 1) % 3;
+        side = {get_vertice(mid), get_vertice(next)};
+
+        if (side.scalar_product(point) > 0) {
+            if (mid != index1) {
+                index1 = mid;
+            }
+            else {
+                return index2;
+            }
+        }
+        else {
+            prev = (mid + 2) % 3;
+            side = {get_vertice(prev), get_vertice(mid)};
+            if (side.scalar_product(point) < 0) {
+                index2 = mid;
+            }
+            else {
+                return mid;
+            }
+        }
+    }
+}
+
+bool Triangle::is_intersect_in_same_plane(const Triangle& triangle) const {
+    for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
+        Vector side(get_vertice(index2), get_vertice(index1));
+        Vector perp_side = side.find_perp_in_plane(plane);
+        int min = triangle.get_extreme_index({perp_side.opposite().x, 
+                                              perp_side.opposite().y,
+                                              perp_side.opposite().z});
+        Vector diff(get_vertice(index1), triangle.get_vertice(min));
+        if (perp_side.scalar_product(diff) > 0) {
+            return false;
+        }
+    }
+    for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
+        Vector side(triangle.get_vertice(index2), triangle.get_vertice(index1));
+        Vector perp_side = side.find_perp_in_plane(plane);
+        int min = get_extreme_index({perp_side.opposite().x, 
+                                     perp_side.opposite().y,
+                                     perp_side.opposite().z});
+        Vector diff(triangle.get_vertice(index1), get_vertice(min));
+        if (perp_side.scalar_product(diff) > 0) {
+            return false;
+        }
+    }
+    return true;
+} 

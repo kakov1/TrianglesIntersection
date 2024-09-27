@@ -15,7 +15,7 @@ bool Line::is_parallel(const Line& line) const {
 
 
 Point Line::lines_intersection(const Line& line) const {
-    std::pair<float, float> params_of_intersection = 
+    std::pair<double, double> params_of_intersection = 
     solve_system_3eq_2var({direction_vector.x, -line.direction_vector.x,
                            line.start_point.x - start_point.x},
                            {direction_vector.y, -line.direction_vector.y,

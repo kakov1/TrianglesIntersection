@@ -13,7 +13,7 @@ int main() {
 
 
     for (int i = 0; i < triangles_number; i++) {
-        float x1, y1, z1, x2, y2, z2, x3, y3, z3;
+        double x1, y1, z1, x2, y2, z2, x3, y3, z3;
         std::cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2 >> x3 >> y3 >> z3;
         Point point1(x1, y1, z1);
         Point point2(x2, y2, z2);

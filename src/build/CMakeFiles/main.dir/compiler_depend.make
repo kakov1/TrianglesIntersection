@@ -1879,6 +1879,8 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  ../plane.hpp \
+  ../line.hpp \
   /usr/include/c++/11/cassert \
   /usr/include/assert.h
 

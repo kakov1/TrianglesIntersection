@@ -1,17 +1,18 @@
 #pragma once
 
 #include "tools.hpp"
-#include "plane.hpp"
 #include "line.hpp"
 #include "vector.hpp"
+
+class Vector;
 
 class Plane {
     public:
         Vector normal;
-        float d;
+        double d;
 
         Plane() {};
-        Plane(const Vector& normal_vector, const float coeff_d) {
+        Plane(const Vector& normal_vector, const double coeff_d) {
             normal = normal_vector;
             d = coeff_d;
         }

@@ -25,9 +25,9 @@ bool Segment::is_on_same_line(const Segment& segment) const {
 
 bool Segment::is_point_belong(const Point& point) const {
     return (Line(start_point, end_point).is_point_belong(point) && 
-            is_float_in_segment(point.x, start_point.x, end_point.x) &&
-            is_float_in_segment(point.y, start_point.y, end_point.y) &&
-            is_float_in_segment(point.z, start_point.z, end_point.z));
+            is_double_in_segment(point.x, start_point.x, end_point.x) &&
+            is_double_in_segment(point.y, start_point.y, end_point.y) &&
+            is_double_in_segment(point.z, start_point.z, end_point.z));
 }
 
 bool Segment::is_valid() const {
@@ -61,8 +61,8 @@ Point Segment::segments_intersection(const Segment& segment) const {
         }
         return NAN_POINT;
     }
-    //std::cout<<"from inter:\n";
-    std::pair<float, float> params_of_intersection = 
+    //std::cout<<"from seg_inter:\n";
+    std::pair<double, double> params_of_intersection = 
     solve_system_3eq_2var({start_point.x - end_point.x,
                            segment.end_point.x - segment.start_point.x,
                            segment.end_point.x - end_point.x},
@@ -81,11 +81,11 @@ Point Segment::segments_intersection(const Segment& segment) const {
         return INFINITY_POINT;
     }
     else {
-        float t = params_of_intersection.first;
-        float s = params_of_intersection.second;
-        //std::cout<< is_float_in_segment(t, 0, 1) << " " << is_float_in_segment(s, 0, 1)<<std::endl;
-        if (is_float_in_segment(t, 0, 1) &&
-            is_float_in_segment(s, 0, 1)) {
+        double t = params_of_intersection.first;
+        double s = params_of_intersection.second;
+        //std::cout<< is_double_in_segment(t, 0, 1) << " " << is_double_in_segment(s, 0, 1)<<std::endl;
+        if (is_double_in_segment(t, 0, 1) &&
+            is_double_in_segment(s, 0, 1)) {
             return {t * start_point.x + (1-t)*end_point.x,
                     t * start_point.y + (1-t)*end_point.y,
                     t * start_point.z + (1-t)*end_point.z};
