@@ -16,7 +16,7 @@ bool Plane::is_collinear(const Plane& plane) const {
 }
 
 int Plane::normalize() {
-    float coefficient = pow(pow(normal.x, 2) + pow(normal.y, 2) + pow(normal.z, 2), 0.5);
+    float coefficient = d;
 
     normal.x /= coefficient;
     normal.y /= coefficient;
@@ -29,12 +29,18 @@ int Plane::normalize() {
 }
 
 void Plane::print() const {
-    std::cout << normal.x << "x" << sign(normal.y) << fabs(normal.z) << "y" << sign(normal.z)
+    std::cout << normal.x << "x" << sign(normal.y) << fabs(normal.y) << "y" << sign(normal.z)
               << fabs(normal.z) << "z" << sign(d) << fabs(d) << "=0" << std::endl;
 }
 
 bool Plane::is_point_over_plane(const Point& point) const {
-    return normal.x * point.x + normal.y * point.y + normal.z * point.z + d > 0;
+    float result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
+    return (result > 0 && !is_equal_floats(result, 0));
+}
+
+bool Plane::is_point_under_plane(const Point& point) const {
+    float result = normal.x * point.x + normal.y * point.y + normal.z * point.z + d;
+    return (result < 0 && !is_equal_floats(result, 0));
 }
 
 Line Plane::intersection(const Plane& plane) const {

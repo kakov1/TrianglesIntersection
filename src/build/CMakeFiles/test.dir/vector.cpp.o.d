@@ -94,6 +94,7 @@ CMakeFiles/test.dir/vector.cpp.o: \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/tools.hpp \
+ /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/segment.hpp \
  /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
  /usr/include/c++/11/initializer_list /usr/include/c++/11/iostream \
  /usr/include/c++/11/ostream /usr/include/c++/11/ios \

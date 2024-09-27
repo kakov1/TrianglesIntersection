@@ -23,6 +23,7 @@ class Line {
         bool is_equal(const Line& line) const;
         bool is_point_belong(const Point& point) const;
         bool is_parallel(const Line& line) const;
+        void print() const;
         //bool is_valid() const;
         //bool is_on_same_line(const Segment& segment) const;
         //float distance_between_lines(const Segment& segment) const;

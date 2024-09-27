@@ -12,9 +12,9 @@ bool Triangle::is_in_same_half_plane(const Plane& plane) const {
     return (plane.is_point_over_plane(a) &&
             plane.is_point_over_plane(b) &&
             plane.is_point_over_plane(c)) ||
-           (!plane.is_point_over_plane(a) &&
-            !plane.is_point_over_plane(b) &&
-            !plane.is_point_over_plane(c));
+           (plane.is_point_under_plane(a) &&
+            plane.is_point_under_plane(b) &&
+            plane.is_point_under_plane(c));
 }
 
 Segment Triangle::intersection_line_in_same_plane(const Line& line) const {
@@ -27,56 +27,52 @@ Segment Triangle::intersection_line_in_same_plane(const Line& line) const {
     if (line.is_equal({a, c})) {
         return {a, c};
     }
-    if (line.is_point_belong(a)) {
-        Point intersection_point = line.lines_intersection({b, c});
-        if (!intersection_point.is_equal(NAN_POINT)) {
-            return {a, intersection_point};
-        }
-        else {
-            return {a, a};
-        }
-    }
-    if (line.is_point_belong(b)) {
-        Point intersection_point = line.lines_intersection({a, c});
-        if (!intersection_point.is_equal(NAN_POINT)) {
-            return {b, intersection_point};
-        }
-        else {
-            return {b, b};
-        }
-    }
-    if (line.is_point_belong(c)) {
-        Point intersection_point = line.lines_intersection({a, b});
-        if (!intersection_point.is_equal(NAN_POINT)) {
-            return {c, intersection_point};
-        }
-        else {
-            return {c, c};
-        }
-    }
+
+    //Line({a,b}).print();
+
     Point intersection_point_ab = line.lines_intersection({a, b});
     Point intersection_point_bc = line.lines_intersection({b, c});
     Point intersection_point_ac = line.lines_intersection({a, c});
+    //std::cout<<"DO:\n";
+    //intersection_point_ab.print();
+    //intersection_point_bc.print();
+    //intersection_point_ac.print();
+
+    //std::cout<<Segment(b, c).is_point_belong(intersection_point_bc)<<std::endl;
+
+    if (!Segment(a, b).is_point_belong(intersection_point_ab)) {
+        intersection_point_ab = NAN_POINT;
+    }
+    if (!Segment(b, c).is_point_belong(intersection_point_bc)) {
+        intersection_point_bc = NAN_POINT;
+    }
+    if (!Segment(a, c).is_point_belong(intersection_point_ac)) {
+        intersection_point_ac = NAN_POINT;
+    }
+    //std::cout<<"POSLE:\n";
+    //intersection_point_ab.print();
+    //intersection_point_bc.print();
+    //intersection_point_ac.print();
 
     if (!intersection_point_ab.is_equal(NAN_POINT) &&
         !intersection_point_bc.is_equal(NAN_POINT)) {
         return {intersection_point_ab, intersection_point_bc};
     }
     else if (!intersection_point_bc.is_equal(NAN_POINT) &&
-        !intersection_point_ac.is_equal(NAN_POINT)) {
+             !intersection_point_ac.is_equal(NAN_POINT)) {
         return {intersection_point_bc, intersection_point_ac};
     }
     else if (!intersection_point_ab.is_equal(NAN_POINT) &&
-        !intersection_point_ac.is_equal(NAN_POINT)) {
+             !intersection_point_ac.is_equal(NAN_POINT)) {
         return {intersection_point_ab, intersection_point_ac};
     }
-    return {{0, 0, 0}, {0, 0, 0}};
+    return NAN_SEGMENT;
 }
 
 bool Triangle::is_intersect(const Triangle& triangle) const {
     if (plane.is_collinear(triangle.plane)) {
         if (plane.is_equal(triangle.plane)) {
-            //is_intersect_in_same_plane(triangle);
+            return false;
         }
         return false;
     }
@@ -86,9 +82,16 @@ bool Triangle::is_intersect(const Triangle& triangle) const {
         }
         else {
             Line intersection_line = plane.intersection(triangle.plane);
+
+            //intersection_line.print();
+
             Segment segment1 = intersection_line_in_same_plane(intersection_line);
             Segment segment2 = triangle.intersection_line_in_same_plane(intersection_line);
-            if (!segment1.segments_intersection(segment2).is_equal(NAN_POINT)) {
+
+            //segment1.print();
+            //segment2.print();
+            if (!segment1.is_nan() && !segment2.is_nan() &&
+                !(segment1.segments_intersection(segment2).is_equal(NAN_POINT))) {
                 return true;
             }
             return false;

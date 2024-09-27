@@ -1,8 +1,8 @@
 #include "line.hpp"
 #include "tools.hpp"
 #include "segment.hpp"
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
 bool Line::is_equal(const Line& line) const {
     return line.direction_vector.is_collinear({start_point, line.start_point}) &&
@@ -39,8 +39,20 @@ Point Line::lines_intersection(const Line& line) const {
 }   
 
 bool Line::is_point_belong(const Point& point) const {
-    return is_equal_floats((point.x-start_point.x)/direction_vector.x,
-                           (point.y-start_point.y)/direction_vector.y) &&
-           is_equal_floats((point.y-start_point.y)/direction_vector.y,
-                           (point.z-start_point.z)/direction_vector.z);
+    if (solve_system_3eq_2var(Vector(point.x, -direction_vector.x, start_point.x),
+                              Vector(point.y, -direction_vector.y, start_point.y),
+                              Vector(point.z, -direction_vector.z, start_point.z))
+                               != NAN_SOLUTION) {
+        return true;
+    }
+    return false;
+}
+
+void Line::print() const {
+    std::cout << "-------------\n";
+    std::cout << "Line:\nstart_point: ";
+    start_point.print();
+    std::cout << "direction_vector:";
+    direction_vector.print();
+    std::cout << "-------------\n";
 }

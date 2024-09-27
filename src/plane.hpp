@@ -19,7 +19,7 @@ class Plane {
             normal.x = det_two(point2.y - point1.y, point2.z - point1.z,
                                point3.y - point1.y, point3.z - point1.z);
             normal.y = -det_two(point2.x - point1.x, point2.z - point1.z,
-                                point3.x - point1.x, point3.z - point1.z);
+                                point3.x - point1.x, point3.z - point1.z); 
             normal.z = det_two(point2.x - point1.x, point2.y - point1.y,
                                point3.x - point1.x, point3.y - point1.y);
             d = -(point1.x*normal.x)-(point1.y*normal.y)-(point1.z*normal.z);
@@ -30,6 +30,7 @@ class Plane {
         bool is_collinear(const Plane& plane) const;
         Line intersection(const Plane& plane) const;
         bool is_point_over_plane(const Point& point) const;
+        bool is_point_under_plane(const Point& point) const;
         void print() const;
         int normalize();
 };

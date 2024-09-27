@@ -142,6 +142,19 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+#=============================================================================
+# Target rules for targets named test_tools
+
+# Build rule for target.
+test_tools: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_tools
+.PHONY : test_tools
+
+# fast build rule for target.
+test_tools/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/build
+.PHONY : test_tools/fast
+
 line.o: line.cpp.o
 .PHONY : line.o
 
@@ -298,6 +311,30 @@ test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+test_tools.o: test_tools.cpp.o
+.PHONY : test_tools.o
+
+# target to build an object file
+test_tools.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.o
+.PHONY : test_tools.cpp.o
+
+test_tools.i: test_tools.cpp.i
+.PHONY : test_tools.i
+
+# target to preprocess a source file
+test_tools.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.i
+.PHONY : test_tools.cpp.i
+
+test_tools.s: test_tools.cpp.s
+.PHONY : test_tools.s
+
+# target to generate assembly for a file
+test_tools.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.s
+.PHONY : test_tools.cpp.s
+
 tools.o: tools.cpp.o
 .PHONY : tools.o
 
@@ -305,6 +342,7 @@ tools.o: tools.cpp.o
 tools.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.o
 .PHONY : tools.cpp.o
 
 tools.i: tools.cpp.i
@@ -314,6 +352,7 @@ tools.i: tools.cpp.i
 tools.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.i
 .PHONY : tools.cpp.i
 
 tools.s: tools.cpp.s
@@ -323,6 +362,7 @@ tools.s: tools.cpp.s
 tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.s
 .PHONY : tools.cpp.s
 
 triangle.o: triangle.cpp.o
@@ -359,6 +399,7 @@ vector.o: vector.cpp.o
 vector.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.o
 .PHONY : vector.cpp.o
 
 vector.i: vector.cpp.i
@@ -368,6 +409,7 @@ vector.i: vector.cpp.i
 vector.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.i
 .PHONY : vector.cpp.i
 
 vector.s: vector.cpp.s
@@ -377,6 +419,7 @@ vector.s: vector.cpp.s
 vector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.s
 .PHONY : vector.cpp.s
 
 # Help Target
@@ -389,6 +432,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... main"
 	@echo "... test"
+	@echo "... test_tools"
 	@echo "... line.o"
 	@echo "... line.i"
 	@echo "... line.s"
@@ -407,6 +451,9 @@ help:
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... test_tools.o"
+	@echo "... test_tools.i"
+	@echo "... test_tools.s"
 	@echo "... tools.o"
 	@echo "... tools.i"
 	@echo "... tools.s"

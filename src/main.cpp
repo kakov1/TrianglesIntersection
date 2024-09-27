@@ -3,6 +3,7 @@
 #include "line.hpp"
 #include "triangle.hpp"
 #include <vector>
+#include <unordered_map>
 #include <iostream>
 
 int main() {
@@ -20,10 +21,12 @@ int main() {
         triangles.emplace_back(point1, point2, point3);
     }
 
+
+
     for (int i = 0; i < triangles_number; i++) {
-        for (int j = i; j < triangles_number; j++) {
-            if (triangles[i].is_intersect(triangles[j])) {
-                std::cout << i  << std::endl;
+        for (int j = 0; j < triangles_number; j++) {
+            if (i != j && triangles[i].is_intersect(triangles[j])) {
+                std::cout << i << std::endl;
             }
         }
     }

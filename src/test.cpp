@@ -1,16 +1,15 @@
-#include "line.hpp"
 #include <iostream>
 #include <utility>
 #include <cmath>
+#include <fstream>
+#include "plane.hpp"
+#include <vector>
 
 int main() {
+    Plane plane1 = Plane({10, 15, 20}, 3);
+    Plane plane2 = Plane({10, 15, 16}, 3);
 
-    Line line1 = {Point(2, 1, 0), Point(2, -3, 1)};
-    Line line2 = {Point(2, 2, 0), Point(2, 1, 1)};
-
-    Point inter = line1.lines_intersection(line2);
-    
-    inter.print();
+    plane1.intersection(plane2).print();
 
     return 0;
 }

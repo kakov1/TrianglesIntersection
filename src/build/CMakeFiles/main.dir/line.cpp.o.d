@@ -95,12 +95,12 @@ CMakeFiles/main.dir/line.cpp.o: \
  /usr/include/c++/11/tr1/riemann_zeta.tcc \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/vector.hpp \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/tools.hpp \
- /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
- /usr/include/c++/11/initializer_list \
  /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/segment.hpp \
- /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
- /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
- /usr/include/c++/11/bits/stringfwd.h \
+ /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/initializer_list /usr/include/c++/11/cassert \
+ /usr/include/assert.h /usr/include/c++/11/iostream \
+ /usr/include/c++/11/ostream /usr/include/c++/11/ios \
+ /usr/include/c++/11/iosfwd /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h /usr/include/c++/11/bits/postypes.h \
  /usr/include/c++/11/cwchar /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
@@ -186,5 +186,4 @@ CMakeFiles/main.dir/line.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/cassert \
- /usr/include/assert.h
+ /usr/include/c++/11/bits/istream.tcc
