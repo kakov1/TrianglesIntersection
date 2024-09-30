@@ -4,6 +4,33 @@
 #include "point.hpp"
 #include <iostream>
 
+Point Triangle::get_a() const { return a; }
+Point Triangle::get_b() const { return b; }
+Point Triangle::get_c() const { return c; }
+
+Triangle::Triangle(const Point& point1, const Point& point2, const Point& point3) {
+    a = point1;
+    b = point2;
+    c = point3;
+    if (is_segment() && !is_point()) {
+        if (!a.is_equal(b) && !b.is_equal(c) && !a.is_equal(c)) {
+            if (Segment(a, b).is_point_belong(c)) {
+                b = point3;
+                c = point2;
+            }
+            else if (Segment(b, c).is_point_belong(a)) {
+                b = point1;
+                a = point2;
+            }
+        }    
+    }
+    if (is_degenerate()) {
+        plane = {NAN_POINT, NAN_POINT, NAN_POINT};
+        return;
+    }
+    plane = Plane(a, b, c);
+}
+
 bool Triangle::is_valid() const {
     return are_points_collinear(a, b, c);
 }
@@ -85,11 +112,17 @@ bool Triangle::is_point_belong(const Point& point) const {
 
 bool Triangle::is_intersect_in_same_plane(const Triangle& triangle) const {
     double min1, max1, min2, max2;
+
     for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
         Vector side(get_vertice(index2), get_vertice(index1));
         Vector perp_side = side.find_perp_in_plane(plane);
-        compute_interval(Point(perp_side.x, perp_side.y, perp_side.z), min1, max1);
-        triangle.compute_interval(Point(perp_side.x, perp_side.y,perp_side.z), min2, max2);
+
+        compute_interval(Point(perp_side.get_x(),
+                               perp_side.get_y(),
+                               perp_side.get_z()), min1, max1);
+        triangle.compute_interval(Point(perp_side.get_x(),
+                                        perp_side.get_y(),
+                                        perp_side.get_z()), min2, max2);
         if (max2 < min1 || max1 < min2) {
             return false;
         }
@@ -97,12 +130,18 @@ bool Triangle::is_intersect_in_same_plane(const Triangle& triangle) const {
     for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
         Vector side(triangle.get_vertice(index2), triangle.get_vertice(index1));
         Vector perp_side = side.find_perp_in_plane(triangle.plane);
-        compute_interval(Point(perp_side.x, perp_side.y,perp_side.z), min1, max1);
-        triangle.compute_interval(Point(perp_side.x, perp_side.y,perp_side.z), min2, max2);
+
+        compute_interval(Point(perp_side.get_x(),
+                               perp_side.get_y(),
+                               perp_side.get_z()), min1, max1);
+        triangle.compute_interval(Point(perp_side.get_x(),
+                                        perp_side.get_y(),
+                                        perp_side.get_z()), min2, max2);
         if (max2 < min1 || max1 < min2) {
             return false;
         }
     }
+
     return true;
 } 
 
@@ -149,7 +188,7 @@ Segment Triangle::intersection_line_in_same_plane(const Line& line) const {
 
 bool Triangle::is_intersect_segment(const Segment& segment) const {
     Vector e1 = Vector(a, b), e2 = Vector(a, c);
-    Vector p = segment.direction_vector.vector_product(e2);
+    Vector p = segment.get_direction_vector().vector_product(e2);
     double tmp = p.scalar_product(e1);
 
     if (tmp > -EPSILON && tmp < EPSILON) {
@@ -157,7 +196,7 @@ bool Triangle::is_intersect_segment(const Segment& segment) const {
     }
 
     tmp = 1 / tmp;
-    Vector s = Vector(a, segment.start_point);
+    Vector s = Vector(a, segment.get_start_point());
 
     double u = tmp * s.scalar_product(p);
     if (u < 0 || u > 1) {
@@ -173,30 +212,39 @@ bool Triangle::is_intersect_segment(const Segment& segment) const {
 
     double t = tmp * e2.scalar_product(q);
 
-    Vector intersection = Vector({0, 0, 0}, segment.start_point) + t * segment.direction_vector;
-    return segment.is_point_belong(Point(intersection.x, intersection.y, intersection.z));
+    Vector intersection = Vector(segment.get_start_point()) + t * segment.get_direction_vector();
+    
+    return segment.is_point_belong(Point(intersection.get_x(),
+                                         intersection.get_y(),
+                                         intersection.get_z()));
+}
+
+bool Triangle::is_intersect_for_point(const Triangle& triangle) const {
+    if (triangle.is_point()) {
+        return a.is_equal(triangle.a);
+    }
+    else if (triangle.is_segment()) {
+        return Segment(triangle.a, triangle.c).is_point_belong(a);
+    }
+    return triangle.is_point_belong(a);
+}
+
+bool Triangle::is_intersect_for_segment(const Triangle& triangle) const {
+    if (triangle.is_point()) {
+        return Segment(a, c).is_point_belong(triangle.a);
+    }
+    else if (triangle.is_segment()) {
+        return !Segment(triangle.a, triangle.c).is_equal(Segment(a, c));
+    }
+    return triangle.is_intersect_segment(Segment(a, c));
 }
 
 bool Triangle::is_intersect(const Triangle& triangle) const {
     if (is_point()) {
-        if (triangle.is_point()) {
-            return a.is_equal(triangle.a);
-        }
-        else if (triangle.is_segment()) {
-            return Segment(triangle.a, triangle.c).is_point_belong(a);
-        }
-        return triangle.is_point_belong(a);
+        return is_intersect_for_point(triangle);
     }
     else if (is_segment()) {
-        if (triangle.is_point()) {
-            return Segment(a, c).is_point_belong(triangle.a);
-        }
-        else if (triangle.is_segment()) {
-            return !Segment(triangle.a, triangle.c).is_equal(Segment(a, c));
-        }
-        else {
-            return triangle.is_intersect_segment(Segment(a, c));
-        }
+        return is_intersect_for_segment(triangle);
     }
     else {
         if (triangle.is_point()) {
@@ -219,15 +267,11 @@ bool Triangle::is_intersect(const Triangle& triangle) const {
         else {
             Line intersection_line = plane.intersection(triangle.plane);
 
-            //intersection_line.print();
-
             Segment segment1 = intersection_line_in_same_plane(intersection_line);
             Segment segment2 = triangle.intersection_line_in_same_plane(intersection_line);
 
-            //segment1.print();
-            //segment2.print();
             Segment intersection = segment1.collinear_segments_intersection(segment2);
-            //intersection.print();
+
             if (!intersection.is_equal(NAN_SEGMENT)) {
                 return true;
             }

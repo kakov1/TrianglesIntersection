@@ -4,6 +4,34 @@
 #include "plane.hpp"
 #include <cassert>
 
+double Vector::get_x() const {
+    return x;
+}
+double Vector::get_y() const {
+    return y;
+}
+double Vector::get_z() const {
+    return z;
+}
+
+Vector::Vector(double coord_x, double coord_y, double coord_z) {
+    x = coord_x;
+    y = coord_y;
+    z = coord_z;
+}
+
+Vector::Vector(const Point& point1, const Point& point2) {
+    x = point2.get_x() - point1.get_x();
+    y = point2.get_y() - point1.get_y();
+    z = point2.get_z() - point1.get_z();
+}
+
+Vector::Vector(const Point& point) {
+    x = point.get_x();
+    y = point.get_y();
+    z = point.get_z();
+}
+
 Vector Vector::operator+(const Vector& vector) const {
     return {x + vector.x, y + vector.y, z + vector.z};
 }
@@ -90,9 +118,8 @@ double Vector::scalar_product(const Vector& vector) const {
 }
 
 Vector Vector::find_perp_in_plane(const Plane& plane) const {
-    return vector_product(plane.normal);
+    return vector_product(plane.get_normal());
 }
-
 
 void Vector::print() const {
     std::cout << "(" << x << ", " << y << ", " << z << ")" << std::endl;

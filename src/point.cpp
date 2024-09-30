@@ -2,6 +2,16 @@
 #include <iostream>
 #include <cmath>
 
+double Point::get_x() const { return x; }
+double Point::get_y() const { return y; }
+double Point::get_z() const { return z; }
+
+Point::Point(double coord_x, double coord_y, double coord_z) {
+    x = coord_x;
+    y = coord_y;
+    z = coord_z;
+}
+
 bool Point::is_equal(const Point& point) const{
     return (is_equal_doubles(x, point.x) &&
             is_equal_doubles(y, point.y) &&

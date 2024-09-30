@@ -9,10 +9,6 @@ bool is_equal_doubles(const double a, const double b) {
     return (std::fabs(a - b) < EPSILON);
 }
 
-double is_zero(const double a) {
-    return is_equal_doubles(a, 0)?0:a;
-}
-
 bool is_double_in_segment(double number, double a, double b) {
     return (std::min(a, b) < number) && (number < std::max(a, b)) ||
            is_equal_doubles(number, a) || is_equal_doubles(number, b);
@@ -34,15 +30,12 @@ char sign(double number) {
 }
 
 std::pair<double, double> solve_system_2eq_2var(const Vector& row1, const Vector& row2) {
-    double main_det = det_two(row1.x, row1.y,
-                             row2.x, row2.y);
-    double x_det = det_two(row1.z, row1.y,
-                          row2.z, row2.y);
-    double y_det = det_two(row1.x, row1.z,
-                          row2.x, row2.z);
-
-    //std::cout<<"2eq_2var\n";
-    //std::cout <<main_det << " " << x_det << " " << y_det << std::endl;
+    double main_det = det_two(row1.get_x(), row1.get_y(),
+                              row2.get_x(), row2.get_y());
+    double x_det = det_two(row1.get_z(), row1.get_y(),
+                           row2.get_z(), row2.get_y());
+    double y_det = det_two(row1.get_x(), row1.get_z(),
+                           row2.get_x(), row2.get_z());
     
     if (is_equal_doubles(main_det, 0)) {
         if (is_equal_doubles(x_det, 0) && is_equal_doubles(y_det, 0)) {
@@ -75,50 +68,30 @@ std::pair<double, double> solve_system_3eq_2var(const Vector& row1, const Vector
     std::pair<double, double> solution23 = solve_system_2eq_2var(row2, row3);
     std::pair<double, double> solution13 = solve_system_2eq_2var(row1, row3);
 
-    //std::cout <<"Solutions:\n";
-    //row1.print();
-    //row2.print();
-    //row3.print();
-    //std::cout << solution12.first << " " << solution12.second << std::endl;
-    //std::cout << solution23.first << " " << solution23.second << std::endl;
-    //std::cout << solution13.first << " " << solution13.second << std::endl;
-    //std::cout << is_equal_solutions(solution12, solution13)<< std::endl;
-    //std::cout << "-------------------------------------------\n";
-
     if (is_inf_solution(solution12) &&
         is_inf_solution(solution23) &&
-        is_inf_solution(solution13)) {
-        return INFINITY_SOLUTION;
-    }
+        is_inf_solution(solution13)) return INFINITY_SOLUTION;
+
     if (is_inf_solution(solution12) &&
-        is_inf_solution(solution23)) {
-        return solution13;
-    }
-        if (is_inf_solution(solution12) &&
-            is_inf_solution(solution13)) {
-        return solution23;
-    }
+        is_inf_solution(solution23)) return solution13;
+
+    if (is_inf_solution(solution12) &&
+        is_inf_solution(solution13)) return solution23;
+
     if (is_inf_solution(solution23) &&
-        is_inf_solution(solution13)) {
-        return solution12;
-    }
-    if (is_inf_solution(solution12)) {
-        return solution23;
-    }
-    if (is_inf_solution(solution23)) {
-        return solution13;
-    }
-    if (is_inf_solution(solution13)) {
-        return solution12;
-    }
+        is_inf_solution(solution13)) return solution12;
+
+    if (is_inf_solution(solution12)) return solution23;
+
+    if (is_inf_solution(solution23)) return solution13;
+
+    if (is_inf_solution(solution13)) return solution12;
+    
     if (is_equal_solutions(solution12, solution13) &&
         is_equal_solutions(solution12, solution23)) {
-            //std::cout<<"asdadsadsdqwddqwd\n";
-            //std::cout << solution12.first << " " << solution12.second << std::endl;
-            return solution12;
+        return solution12;
     }
     else {
-        //std::cout << "kvakva\n"<<std::endl;
         return NAN_SOLUTION;
     }
 }

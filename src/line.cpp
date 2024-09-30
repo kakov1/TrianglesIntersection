@@ -4,6 +4,19 @@
 #include <cassert>
 #include <iostream>
 
+Point Line::get_start_point() const { return start_point; }
+Vector Line::get_direction_vector() const { return direction_vector; }
+
+Line::Line(const Point& point1, const Point& point2) {
+    start_point = point1;
+    direction_vector = {point1, point2};
+}
+
+Line::Line(const Point& point, const Vector& vector) {
+    start_point = point;
+    direction_vector = vector;
+}
+
 bool Line::is_equal(const Line& line) const {
     return line.direction_vector.is_collinear({start_point, line.start_point}) &&
            line.direction_vector.is_collinear(direction_vector);
@@ -16,12 +29,12 @@ bool Line::is_parallel(const Line& line) const {
 
 Point Line::lines_intersection(const Line& line) const {
     std::pair<double, double> params_of_intersection = 
-    solve_system_3eq_2var({direction_vector.x, -line.direction_vector.x,
-                           line.start_point.x - start_point.x},
-                           {direction_vector.y, -line.direction_vector.y,
-                           line.start_point.y - start_point.y},
-                           {direction_vector.z, -line.direction_vector.z,
-                           line.start_point.z - start_point.z}
+    solve_system_3eq_2var({direction_vector.get_x(), -line.direction_vector.get_x(),
+                           line.start_point.get_x() - start_point.get_x()},
+                           {direction_vector.get_y(), -line.direction_vector.get_y(),
+                           line.start_point.get_y() - start_point.get_y()},
+                           {direction_vector.get_z(), -line.direction_vector.get_z(),
+                           line.start_point.get_z() - start_point.get_z()}
                          );
     
     if (is_nan_solution(params_of_intersection)) {
@@ -31,17 +44,17 @@ Point Line::lines_intersection(const Line& line) const {
         return INFINITY_POINT;
     }
     else {
-        return {start_point.x + params_of_intersection.first*direction_vector.x,
-                start_point.y + params_of_intersection.first*direction_vector.y,
-                start_point.z + params_of_intersection.first*direction_vector.z,
+        return {start_point.get_x() + params_of_intersection.first*direction_vector.get_x(),
+                start_point.get_y() + params_of_intersection.first*direction_vector.get_y(),
+                start_point.get_z() + params_of_intersection.first*direction_vector.get_z(),
                };
     }
 }   
 
 bool Line::is_point_belong(const Point& point) const {
-    if (solve_system_3eq_2var(Vector(point.x, -direction_vector.x, start_point.x),
-                              Vector(point.y, -direction_vector.y, start_point.y),
-                              Vector(point.z, -direction_vector.z, start_point.z))
+    if (solve_system_3eq_2var(Vector(point.get_x(), -direction_vector.get_x(), start_point.get_x()),
+                              Vector(point.get_y(), -direction_vector.get_y(), start_point.get_y()),
+                              Vector(point.get_z(), -direction_vector.get_z(), start_point.get_z()))
                                != NAN_SOLUTION) {
         return true;
     }

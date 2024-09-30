@@ -3,15 +3,16 @@
 #include <cmath>
 
 class Point {
-    public:
+    private:
         double x = NAN, y = NAN, z = NAN;
-        
+    public:
         Point() {};
-        Point(double coord_x, double coord_y, double coord_z) {
-            x = coord_x;
-            y = coord_y;
-            z = coord_z;
-        }
+        Point(double coord_x, double coord_y, double coord_z);
+
+        double get_x() const;
+        double get_y() const;
+        double get_z() const;
+
         void print() const;
         bool is_equal(const Point& point) const;
         bool is_valid() const;

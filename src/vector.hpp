@@ -6,45 +6,37 @@
 class Plane;
 
 class Vector {
-    public:
+    private:
         double x = NAN;
         double y = NAN;
         double z = NAN;
-
+    public:
         Vector() {}
-        Vector(double coord_x, double coord_y, double coord_z) {
-            x = coord_x;
-            y = coord_y;
-            z = coord_z;
-        }
-        Vector(const Point& point1, const Point& point2) {
-            x = point2.x - point1.x;
-            y = point2.y - point1.y;
-            z = point2.z - point1.z;
-        }
-        Vector(const Point& point) {
-            x = point.x;
-            y = point.y;
-            z = point.z;
-        }
+        Vector(double coord_x, double coord_y, double coord_z);
+        Vector(const Point& point1, const Point& point2);
+        Vector(const Point& point);
+
+        double get_x() const;
+        double get_y() const;
+        double get_z() const;
 
         void print() const;
         bool is_equal(const Vector& vector) const;
-        Vector opposite() const;
-        int normalize();
-        double scalar_product(const Vector& vector) const;
-        Vector vector_product(const Vector& vector) const;
-        double triple_product(const Vector& a, const Vector& b) const;
-        double vector_module() const;
         bool is_collinear(const Vector& vector) const;
         bool is_skew(const Vector& vector) const;
+        bool is_codirectional(const Vector& vector) const;
+        int normalize();
+        double scalar_product(const Vector& vector) const;
+        double triple_product(const Vector& a, const Vector& b) const;
+        double vector_module() const;
+        double length() const;
+        Vector vector_product(const Vector& vector) const;
         Vector find_perp_in_plane(const Plane& plane) const;
         Vector operator+(const Vector& vector) const;
         Vector operator-(const Vector& vector) const;
         Vector operator*(double number) const;
         Vector operator/(double number) const;
-        bool is_codirectional(const Vector& vector) const;
-        double length() const;
+        Vector opposite() const;
 };
 
 Vector operator*(double number, const Vector& vector);

@@ -3,9 +3,7 @@
 #include "line.hpp"
 #include "triangle.hpp"
 #include <vector>
-#include <unordered_map>
 #include <iostream>
-#include <set>
 
 int main() {
     size_t triangles_number;
@@ -21,8 +19,6 @@ int main() {
         }
         triangles.emplace_back(triangle_points[0], triangle_points[1], triangle_points[2]);
     }
-
-
 
     for (int i = 0; i < triangles_number; i++) {
         for (int j = 0; j < triangles_number; j++) {
