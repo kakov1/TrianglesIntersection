@@ -11,6 +11,10 @@ bool Plane::is_equal(const Plane& plane) const {
     return false;
 }
 
+bool Plane::is_point_belong(const Point& point) const {
+    return is_equal_doubles(normal.x * point.x + normal.y * point.y + normal.z * point.z + d, 0);
+}
+
 bool Plane::is_collinear(const Plane& plane) const {
     return normal.is_collinear(plane.normal);
 }

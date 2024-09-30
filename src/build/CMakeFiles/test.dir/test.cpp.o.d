@@ -182,14 +182,8 @@ CMakeFiles/test.dir/test.cpp.o: \
  /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/plane.hpp \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/tools.hpp \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/point.hpp \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/vector.hpp \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/segment.hpp \
- /home/kakov/Документы/projects/ILab_24-25/TrianglesIntersection/src/line.hpp \
- /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc

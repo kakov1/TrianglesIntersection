@@ -107,9 +107,16 @@ CMakeFiles/main.dir/line.cpp.o: ../line.cpp \
   ../vector.hpp \
   ../tools.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/cassert \
   /usr/include/assert.h \
   /usr/include/c++/11/iostream \
@@ -132,7 +139,6 @@ CMakeFiles/main.dir/line.cpp.o: ../line.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -185,7 +191,6 @@ CMakeFiles/main.dir/line.cpp.o: ../line.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -334,9 +339,16 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   ../line.hpp \
   ../triangle.hpp \
   /usr/include/c++/11/vector \
@@ -355,12 +367,9 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/bits/stl_vector.h \
   /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/functional_hash.h \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/range_access.h \
   /usr/include/c++/11/bits/vector.tcc \
   /usr/include/c++/11/unordered_map \
-  /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/stl_function.h \
   /usr/include/c++/11/backward/binders.h \
   /usr/include/c++/11/bits/hashtable.h \
@@ -368,8 +377,6 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/tuple \
   /usr/include/c++/11/array \
   /usr/include/c++/11/bits/uses_allocator.h \
-  /usr/include/c++/11/bits/invoke.h \
-  /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
@@ -470,7 +477,11 @@ CMakeFiles/main.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/basic_ios.tcc \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
-  /usr/include/c++/11/bits/istream.tcc
+  /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h
 
 CMakeFiles/main.dir/plane.cpp.o: ../plane.cpp \
   /usr/include/stdc-predef.h \
@@ -578,9 +589,16 @@ CMakeFiles/main.dir/plane.cpp.o: ../plane.cpp \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   ../line.hpp \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
@@ -602,7 +620,6 @@ CMakeFiles/main.dir/plane.cpp.o: ../plane.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -655,7 +672,6 @@ CMakeFiles/main.dir/plane.cpp.o: ../plane.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -803,9 +819,16 @@ CMakeFiles/main.dir/point.cpp.o: ../point.cpp \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -826,7 +849,6 @@ CMakeFiles/main.dir/point.cpp.o: ../point.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -879,7 +901,6 @@ CMakeFiles/main.dir/point.cpp.o: ../point.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -1026,10 +1047,17 @@ CMakeFiles/main.dir/segment.cpp.o: ../segment.cpp \
   /usr/include/c++/11/tr1/poly_laguerre.tcc \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
-  ../tools.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
+  ../tools.hpp \
   ../line.hpp \
   /usr/include/c++/11/cassert \
   /usr/include/assert.h \
@@ -1104,8 +1132,6 @@ CMakeFiles/main.dir/segment.cpp.o: ../segment.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -1138,7 +1164,6 @@ CMakeFiles/main.dir/segment.cpp.o: ../segment.cpp \
   /usr/include/c++/11/typeinfo \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/streambuf.tcc \
-  /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/ranges_util.h \
   /usr/include/c++/11/pstl/glue_algorithm_defs.h \
   /usr/include/c++/11/functional \
@@ -1148,10 +1173,8 @@ CMakeFiles/main.dir/segment.cpp.o: ../segment.cpp \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/std_function.h \
   /usr/include/c++/11/unordered_map \
-  /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/hashtable.h \
   /usr/include/c++/11/bits/hashtable_policy.h \
-  /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
@@ -1282,9 +1305,16 @@ CMakeFiles/main.dir/tools.cpp.o: ../tools.cpp \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -1305,7 +1335,6 @@ CMakeFiles/main.dir/tools.cpp.o: ../tools.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -1358,7 +1387,6 @@ CMakeFiles/main.dir/tools.cpp.o: ../tools.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -1405,7 +1433,6 @@ CMakeFiles/main.dir/tools.cpp.o: ../tools.cpp \
   /usr/include/c++/11/bits/ranges_algobase.h \
   /usr/include/c++/11/iterator \
   /usr/include/c++/11/bits/stream_iterator.h \
-  /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/ranges_util.h \
   /usr/include/c++/11/pstl/glue_algorithm_defs.h \
   /usr/include/c++/11/functional \
@@ -1415,10 +1442,8 @@ CMakeFiles/main.dir/tools.cpp.o: ../tools.cpp \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/std_function.h \
   /usr/include/c++/11/unordered_map \
-  /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/hashtable.h \
   /usr/include/c++/11/bits/hashtable_policy.h \
-  /usr/include/c++/11/bits/enable_special_members.h \
   /usr/include/c++/11/bits/node_handle.h \
   /usr/include/c++/11/bits/unordered_map.h \
   /usr/include/c++/11/bits/erase_if.h \
@@ -1534,11 +1559,18 @@ CMakeFiles/main.dir/triangle.cpp.o: ../triangle.cpp \
   /usr/include/c++/11/tr1/poly_laguerre.tcc \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../vector.hpp \
-  ../plane.hpp \
-  ../tools.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
+  ../plane.hpp \
+  ../tools.hpp \
   ../line.hpp \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
@@ -1560,7 +1592,6 @@ CMakeFiles/main.dir/triangle.cpp.o: ../triangle.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -1613,7 +1644,6 @@ CMakeFiles/main.dir/triangle.cpp.o: ../triangle.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -1761,9 +1791,16 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
   /usr/include/c++/11/tr1/riemann_zeta.tcc \
   ../tools.hpp \
   ../segment.hpp \
+  /usr/include/c++/11/variant \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
   /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/hash_bytes.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/parse_numbers.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -1784,7 +1821,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
   /usr/include/c++/11/bits/exception_ptr.h \
   /usr/include/c++/11/bits/cxxabi_init_exception.h \
   /usr/include/c++/11/typeinfo \
-  /usr/include/c++/11/bits/hash_bytes.h \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
   /usr/include/c++/11/cstdint \
@@ -1837,7 +1873,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
   /usr/include/c++/11/ext/alloc_traits.h \
   /usr/include/c++/11/bits/alloc_traits.h \
   /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
   /usr/include/c++/11/bits/ranges_base.h \
   /usr/include/c++/11/bits/max_size_type.h \
   /usr/include/c++/11/numbers \
@@ -1891,11 +1926,11 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/refwrap.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+/usr/include/c++/11/bits/ranges_util.h:
 
-/usr/include/wchar.h:
+/usr/include/c++/11/bits/stream_iterator.h:
 
-/usr/include/c++/11/bits/cxxabi_init_exception.h:
+/usr/include/c++/11/bits/ranges_algobase.h:
 
 /usr/include/c++/11/cwchar:
 
@@ -1909,12 +1944,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/algorithm:
 
-/usr/include/c++/11/tr1/poly_laguerre.tcc:
-
-/usr/include/c++/11/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/11/cstdlib:
-
 /usr/include/c++/11/cassert:
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
@@ -1923,15 +1952,33 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 ../point.cpp:
 
+/usr/include/wchar.h:
+
+/usr/include/c++/11/bits/cxxabi_init_exception.h:
+
+/usr/include/c++/11/bits/parse_numbers.h:
+
+/usr/include/c++/11/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/11/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/11/cstdlib:
+
+/usr/include/assert.h:
+
+/usr/include/c++/11/numbers:
+
+/usr/include/c++/11/bits/string_view.tcc:
+
+/usr/include/c++/11/bits/functional_hash.h:
+
+/usr/include/c++/11/variant:
+
+../segment.hpp:
+
 ../tools.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
 ../vector.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
 /usr/include/c++/11/tr1/poly_hermite.tcc:
 
@@ -1947,17 +1994,11 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/tr1/exp_integral.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
 /usr/include/c++/11/bits/locale_facets.h:
 
 /usr/include/c++/11/bits/exception.h:
 
 /usr/include/c++/11/new:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
-
-/usr/include/c++/11/debug/assertions.h:
 
 /usr/include/c++/11/bits/ranges_cmp.h:
 
@@ -1969,9 +2010,15 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/tuple:
 
+/usr/include/c++/11/bits/stl_tree.h:
+
 /usr/include/c++/11/bits/stl_relops.h:
 
 ../triangle.hpp:
+
+/usr/include/c++/11/bits/hash_bytes.h:
+
+/usr/include/c++/11/bits/move.h:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
@@ -1995,7 +2042,13 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/ext/new_allocator.h:
 
+/usr/include/c++/11/bits/invoke.h:
+
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
@@ -2041,8 +2094,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/limits:
 
-/usr/include/c++/11/bits/ranges_util.h:
-
 /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
@@ -2054,8 +2105,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-../segment.hpp:
 
 /usr/include/c++/11/tr1/bessel_function.tcc:
 
@@ -2076,14 +2125,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/c++/11/streambuf:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/include/math.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/c++/11/bits/std_function.h:
-
-/usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
@@ -2113,8 +2154,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/iterator_concepts.h:
 
-/usr/include/c++/11/bits/ranges_algobase.h:
-
 /usr/include/c++/11/ext/numeric_traits.h:
 
 /usr/include/features.h:
@@ -2132,6 +2171,10 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/stdlib.h:
 
 ../line.cpp:
+
+/usr/include/c++/11/ext/aligned_buffer.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
@@ -2155,15 +2198,11 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/ios_base.h:
 
+/usr/include/c++/11/set:
+
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/c++/11/bits/concept_check.h:
-
-/usr/include/c++/11/bits/node_handle.h:
-
-/usr/include/c++/11/iostream:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
 
@@ -2174,10 +2213,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
-/usr/include/c++/11/ext/aligned_buffer.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
@@ -2191,6 +2226,34 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
+/usr/include/c++/11/debug/assertions.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/include/c++/11/iostream:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/c++/11/bits/node_handle.h:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/c++/11/bits/std_function.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
 /usr/include/c++/11/exception:
 
 /usr/include/c++/11/bits/exception_ptr.h:
@@ -2200,16 +2263,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/c++/11/typeinfo:
-
-/usr/include/c++/11/bits/move.h:
-
-/usr/include/c++/11/bits/hash_bytes.h:
-
-/usr/include/assert.h:
-
-/usr/include/c++/11/numbers:
-
-/usr/include/c++/11/bits/string_view.tcc:
 
 /usr/include/c++/11/bits/nested_exception.h:
 
@@ -2235,8 +2288,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/ctype.h:
 
-/usr/include/c++/11/bits/stream_iterator.h:
-
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
@@ -2252,12 +2303,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/c++/11/bits/unordered_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/x86_64-linux-gnu/bits/timex.h:
-
-/usr/include/c++/11/bits/invoke.h:
 
 /usr/include/time.h:
 
@@ -2293,9 +2338,9 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/algorithmfwd.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
 /usr/include/c++/11/iterator:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/c++/11/bits/range_access.h:
 
@@ -2317,7 +2362,7 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/string_view:
 
-/usr/include/c++/11/bits/functional_hash.h:
+/usr/include/c++/11/bits/stl_set.h:
 
 /usr/include/c++/11/bits/max_size_type.h:
 
@@ -2369,6 +2414,10 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/locale_facets.tcc:
 
+/usr/include/c++/11/bits/enable_special_members.h:
+
+/usr/include/c++/11/bits/basic_ios.tcc:
+
 /usr/include/c++/11/istream:
 
 /usr/include/c++/11/bits/istream.tcc:
@@ -2397,10 +2446,6 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 
 /usr/include/c++/11/bits/uses_allocator.h:
 
-/usr/include/c++/11/bits/basic_ios.tcc:
-
-/usr/include/c++/11/bits/enable_special_members.h:
-
 /usr/include/c++/11/bits/ptr_traits.h:
 
 /usr/include/endian.h:
@@ -2408,5 +2453,7 @@ CMakeFiles/main.dir/vector.cpp.o: ../vector.cpp \
 /usr/include/stdint.h:
 
 /usr/include/c++/11/bits/erase_if.h:
+
+/usr/include/c++/11/bits/stl_multiset.h:
 
 ../plane.cpp:

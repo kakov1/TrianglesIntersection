@@ -4,8 +4,12 @@
 #include "plane.hpp"
 #include <cassert>
 
-Vector Vector::operator+(Vector vector) const {
+Vector Vector::operator+(const Vector& vector) const {
     return {x + vector.x, y + vector.y, z + vector.z};
+}
+
+Vector Vector::operator-(const Vector& vector) const {
+    return {x - vector.x, y - vector.y, z - vector.z};
 }
 
 Vector Vector::operator*(double number) const {
@@ -50,6 +54,17 @@ Vector Vector::vector_product(const Vector& vector) const {
     return {det_two(y, z,  vector.y, vector.z),
             -det_two(x, z,  vector.x, vector.z),
             det_two(x, y,  vector.x, vector.y)};
+}
+
+double Vector::length() const {
+    return pow(pow(x, 2) + pow(y, 2) + pow(z, 2), 0.5);
+}
+
+bool Vector::is_codirectional(const Vector& vector) const {
+    if (!is_collinear(vector)) {
+        return false;
+    }
+    return is_equal_doubles(length()*vector.length(), scalar_product(vector));
 }
 
 double Vector::triple_product(const Vector& a, const Vector& b) const {

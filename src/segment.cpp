@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cassert>
 #include <algorithm>
+#include <variant>
 #include <iostream>
 
 bool Segment::is_on_same_line(const Segment& segment) const {
@@ -38,6 +39,11 @@ bool Segment::is_nan() const {
     return start_point.is_nan() && end_point.is_nan();
 }
 
+bool Segment::is_equal(const Segment& segment) const {
+    return (start_point.is_equal(segment.start_point) && end_point.is_equal(segment.end_point)) ||
+           (start_point.is_equal(segment.end_point) && end_point.is_equal(segment.start_point));
+}
+
 void Segment::print() const {
     std::cout << "-------------\n";
     std::cout << "Segment:\nstart_point: ";
@@ -47,19 +53,73 @@ void Segment::print() const {
     std::cout << "-------------\n";
 }
 
-Point Segment::segments_intersection(const Segment& segment) const {
-    //std::cout <<"sdasdadsadsdasd\n";
+double Segment::length() const {
+    return pow(pow(start_point.x - end_point.x, 2) +
+               pow(start_point.y - end_point.y, 2) +
+               pow(start_point.z - end_point.z, 2), 0.5);
+}
+
+Segment Segment::segments_intersection(const Segment& segment) const {
+    if (segment.direction_vector.is_collinear(direction_vector)) {
+        return collinear_segments_intersection(segment);
+    }
+    return not_collinear_segments_intersection(segment);
+
+}
+
+Segment Segment::collinear_segments_intersection(const Segment& segment) const {
+    Segment segment_copy = segment;
+    if (!direction_vector.is_codirectional(segment.direction_vector)) {
+        segment_copy = Segment(segment.end_point, segment.start_point);
+    }
+    //std::cout << "----------------------" <<std::endl;
+    //print();
+    //segment.print();
+    //segment_copy.print();
+
+    if (is_point_belong(segment_copy.start_point)) {
+        //std::cout<<"1"<<std::endl;
+        if (is_point_belong(segment_copy.end_point)) {
+            return Segment(segment_copy.start_point, segment_copy.end_point);
+        }
+        return Segment(segment_copy.start_point, end_point);
+    }
+    if (is_point_belong(segment_copy.end_point)) {
+        //std::cout<<"2"<<std::endl;
+        if (is_point_belong(segment_copy.start_point)) {
+            return Segment(segment_copy.start_point, segment_copy.end_point);
+        }
+        return Segment(start_point, segment_copy.end_point);
+    }
+    if (segment_copy.is_point_belong(start_point)) {
+        //std::cout<<"3"<<std::endl;
+        if (segment_copy.is_point_belong(end_point)) {
+            return Segment(start_point, end_point);
+        }
+        return Segment(start_point, segment_copy.end_point);
+    }
+    if (segment_copy.is_point_belong(end_point)) {
+        std::cout<<"4"<<std::endl;
+        if (segment_copy.is_point_belong(start_point)) {
+            return Segment(start_point, end_point);
+        }
+        return Segment(segment_copy.start_point, end_point);
+    }
+    return NAN_SEGMENT;
+}
+
+Segment Segment::not_collinear_segments_intersection(const Segment& segment) const {
     if (start_point.is_equal(end_point)) {
         if (segment.is_point_belong(start_point)) {
-            return start_point;
+            return Segment(start_point);
         } 
-        return NAN_POINT;
+        return NAN_SEGMENT;
     }
     if (segment.start_point.is_equal(segment.end_point)) {
         if (is_point_belong(segment.start_point)) {
-            return segment.start_point;
+            return Segment(segment.start_point);
         }
-        return NAN_POINT;
+        return NAN_SEGMENT;
     }
     //std::cout<<"from seg_inter:\n";
     std::pair<double, double> params_of_intersection = 
@@ -75,21 +135,16 @@ Point Segment::segments_intersection(const Segment& segment) const {
                          );
     //std::cout << params_of_intersection.first << " " << params_of_intersection.second<<std::endl;
     if (is_nan_solution(params_of_intersection)) {
-        return NAN_POINT;
+        return NAN_SEGMENT;
     }
-    else if (is_inf_solution(params_of_intersection)) {
-        return INFINITY_POINT;
+    double t = params_of_intersection.first;
+    double s = params_of_intersection.second;
+    //std::cout<< is_double_in_segment(t, 0, 1) << " " << is_double_in_segment(s, 0, 1)<<std::endl;
+    if (is_double_in_segment(t, 0, 1) &&
+        is_double_in_segment(s, 0, 1)) {
+        return Segment(Point(t * start_point.x + (1-t)*end_point.x,
+                t * start_point.y + (1-t)*end_point.y,
+                t * start_point.z + (1-t)*end_point.z));
     }
-    else {
-        double t = params_of_intersection.first;
-        double s = params_of_intersection.second;
-        //std::cout<< is_double_in_segment(t, 0, 1) << " " << is_double_in_segment(s, 0, 1)<<std::endl;
-        if (is_double_in_segment(t, 0, 1) &&
-            is_double_in_segment(s, 0, 1)) {
-            return {t * start_point.x + (1-t)*end_point.x,
-                    t * start_point.y + (1-t)*end_point.y,
-                    t * start_point.z + (1-t)*end_point.z};
-        }
-        return NAN_POINT;
-    }
+    return NAN_SEGMENT;
 }

@@ -26,7 +26,7 @@ bool are_points_collinear(const Point& point1, const Point& point2, const Point&
     Vector side1(point1, point2);
     Vector side2(point2, point3);
     
-    return (!side1.is_collinear(side2));
+    return (side1.is_collinear(side2));
 }
 
 char sign(double number) {

@@ -7,7 +7,7 @@
 #include <cmath>
 #include <utility>
 
-const double EPSILON = 1e-4;
+const double EPSILON = 1e-8;
 const Point NAN_POINT = {NAN, NAN, NAN};
 const Point INFINITY_POINT = {INFINITY, INFINITY, INFINITY};
 const Vector NAN_VECTOR = {NAN, NAN, NAN};

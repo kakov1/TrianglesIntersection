@@ -5,20 +5,21 @@
 #include <vector>
 #include <unordered_map>
 #include <iostream>
+#include <set>
 
 int main() {
     size_t triangles_number;
     std::cin >> triangles_number;
     std::vector<Triangle> triangles;
 
-
     for (int i = 0; i < triangles_number; i++) {
-        double x1, y1, z1, x2, y2, z2, x3, y3, z3;
-        std::cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2 >> x3 >> y3 >> z3;
-        Point point1(x1, y1, z1);
-        Point point2(x2, y2, z2);
-        Point point3(x3, y3, z3);
-        triangles.emplace_back(point1, point2, point3);
+        double x, y, z;
+        std::vector<Point> triangle_points;
+        for (int j = 0; j < 3; j++) {
+            std::cin >> x >> y >> z;
+            triangle_points.push_back(Point(x, y, z));
+        }
+        triangles.emplace_back(triangle_points[0], triangle_points[1], triangle_points[2]);
     }
 
 
@@ -27,6 +28,7 @@ int main() {
         for (int j = 0; j < triangles_number; j++) {
             if (i != j && triangles[i].is_intersect(triangles[j])) {
                 std::cout << i << std::endl;
+                break;
             }
         }
     }

@@ -129,39 +129,12 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-#=============================================================================
-# Target rules for targets named test
-
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
-
-# fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
-
-#=============================================================================
-# Target rules for targets named test_tools
-
-# Build rule for target.
-test_tools: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_tools
-.PHONY : test_tools
-
-# fast build rule for target.
-test_tools/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/build
-.PHONY : test_tools/fast
-
 line.o: line.cpp.o
 .PHONY : line.o
 
 # target to build an object file
 line.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/line.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/line.cpp.o
 .PHONY : line.cpp.o
 
 line.i: line.cpp.i
@@ -170,7 +143,6 @@ line.i: line.cpp.i
 # target to preprocess a source file
 line.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/line.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/line.cpp.i
 .PHONY : line.cpp.i
 
 line.s: line.cpp.s
@@ -179,7 +151,6 @@ line.s: line.cpp.s
 # target to generate assembly for a file
 line.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/line.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/line.cpp.s
 .PHONY : line.cpp.s
 
 main.o: main.cpp.o
@@ -212,7 +183,6 @@ plane.o: plane.cpp.o
 # target to build an object file
 plane.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/plane.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/plane.cpp.o
 .PHONY : plane.cpp.o
 
 plane.i: plane.cpp.i
@@ -221,7 +191,6 @@ plane.i: plane.cpp.i
 # target to preprocess a source file
 plane.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/plane.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/plane.cpp.i
 .PHONY : plane.cpp.i
 
 plane.s: plane.cpp.s
@@ -230,7 +199,6 @@ plane.s: plane.cpp.s
 # target to generate assembly for a file
 plane.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/plane.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/plane.cpp.s
 .PHONY : plane.cpp.s
 
 point.o: point.cpp.o
@@ -239,7 +207,6 @@ point.o: point.cpp.o
 # target to build an object file
 point.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/point.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/point.cpp.o
 .PHONY : point.cpp.o
 
 point.i: point.cpp.i
@@ -248,7 +215,6 @@ point.i: point.cpp.i
 # target to preprocess a source file
 point.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/point.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/point.cpp.i
 .PHONY : point.cpp.i
 
 point.s: point.cpp.s
@@ -257,7 +223,6 @@ point.s: point.cpp.s
 # target to generate assembly for a file
 point.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/point.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/point.cpp.s
 .PHONY : point.cpp.s
 
 segment.o: segment.cpp.o
@@ -266,7 +231,6 @@ segment.o: segment.cpp.o
 # target to build an object file
 segment.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/segment.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/segment.cpp.o
 .PHONY : segment.cpp.o
 
 segment.i: segment.cpp.i
@@ -275,7 +239,6 @@ segment.i: segment.cpp.i
 # target to preprocess a source file
 segment.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/segment.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/segment.cpp.i
 .PHONY : segment.cpp.i
 
 segment.s: segment.cpp.s
@@ -284,56 +247,7 @@ segment.s: segment.cpp.s
 # target to generate assembly for a file
 segment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/segment.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/segment.cpp.s
 .PHONY : segment.cpp.s
-
-test.o: test.cpp.o
-.PHONY : test.o
-
-# target to build an object file
-test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.o
-.PHONY : test.cpp.o
-
-test.i: test.cpp.i
-.PHONY : test.i
-
-# target to preprocess a source file
-test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.i
-.PHONY : test.cpp.i
-
-test.s: test.cpp.s
-.PHONY : test.s
-
-# target to generate assembly for a file
-test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
-.PHONY : test.cpp.s
-
-test_tools.o: test_tools.cpp.o
-.PHONY : test_tools.o
-
-# target to build an object file
-test_tools.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.o
-.PHONY : test_tools.cpp.o
-
-test_tools.i: test_tools.cpp.i
-.PHONY : test_tools.i
-
-# target to preprocess a source file
-test_tools.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.i
-.PHONY : test_tools.cpp.i
-
-test_tools.s: test_tools.cpp.s
-.PHONY : test_tools.s
-
-# target to generate assembly for a file
-test_tools.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/test_tools.cpp.s
-.PHONY : test_tools.cpp.s
 
 tools.o: tools.cpp.o
 .PHONY : tools.o
@@ -341,8 +255,6 @@ tools.o: tools.cpp.o
 # target to build an object file
 tools.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.o
 .PHONY : tools.cpp.o
 
 tools.i: tools.cpp.i
@@ -351,8 +263,6 @@ tools.i: tools.cpp.i
 # target to preprocess a source file
 tools.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.i
 .PHONY : tools.cpp.i
 
 tools.s: tools.cpp.s
@@ -361,8 +271,6 @@ tools.s: tools.cpp.s
 # target to generate assembly for a file
 tools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/tools.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/tools.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/tools.cpp.s
 .PHONY : tools.cpp.s
 
 triangle.o: triangle.cpp.o
@@ -371,7 +279,6 @@ triangle.o: triangle.cpp.o
 # target to build an object file
 triangle.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/triangle.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/triangle.cpp.o
 .PHONY : triangle.cpp.o
 
 triangle.i: triangle.cpp.i
@@ -380,7 +287,6 @@ triangle.i: triangle.cpp.i
 # target to preprocess a source file
 triangle.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/triangle.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/triangle.cpp.i
 .PHONY : triangle.cpp.i
 
 triangle.s: triangle.cpp.s
@@ -389,7 +295,6 @@ triangle.s: triangle.cpp.s
 # target to generate assembly for a file
 triangle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/triangle.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/triangle.cpp.s
 .PHONY : triangle.cpp.s
 
 vector.o: vector.cpp.o
@@ -398,8 +303,6 @@ vector.o: vector.cpp.o
 # target to build an object file
 vector.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.o
 .PHONY : vector.cpp.o
 
 vector.i: vector.cpp.i
@@ -408,8 +311,6 @@ vector.i: vector.cpp.i
 # target to preprocess a source file
 vector.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.i
 .PHONY : vector.cpp.i
 
 vector.s: vector.cpp.s
@@ -418,8 +319,6 @@ vector.s: vector.cpp.s
 # target to generate assembly for a file
 vector.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/vector.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/vector.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_tools.dir/build.make CMakeFiles/test_tools.dir/vector.cpp.s
 .PHONY : vector.cpp.s
 
 # Help Target
@@ -431,8 +330,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
-	@echo "... test"
-	@echo "... test_tools"
 	@echo "... line.o"
 	@echo "... line.i"
 	@echo "... line.s"
@@ -448,12 +345,6 @@ help:
 	@echo "... segment.o"
 	@echo "... segment.i"
 	@echo "... segment.s"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
-	@echo "... test_tools.o"
-	@echo "... test_tools.i"
-	@echo "... test_tools.s"
 	@echo "... tools.o"
 	@echo "... tools.i"
 	@echo "... tools.s"

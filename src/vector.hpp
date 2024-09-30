@@ -17,10 +17,15 @@ class Vector {
             y = coord_y;
             z = coord_z;
         }
-        Vector(Point point1, Point point2) {
+        Vector(const Point& point1, const Point& point2) {
             x = point2.x - point1.x;
             y = point2.y - point1.y;
             z = point2.z - point1.z;
+        }
+        Vector(const Point& point) {
+            x = point.x;
+            y = point.y;
+            z = point.z;
         }
 
         void print() const;
@@ -34,9 +39,12 @@ class Vector {
         bool is_collinear(const Vector& vector) const;
         bool is_skew(const Vector& vector) const;
         Vector find_perp_in_plane(const Plane& plane) const;
-        Vector operator+(Vector vector) const;
+        Vector operator+(const Vector& vector) const;
+        Vector operator-(const Vector& vector) const;
         Vector operator*(double number) const;
         Vector operator/(double number) const;
+        bool is_codirectional(const Vector& vector) const;
+        double length() const;
 };
 
 Vector operator*(double number, const Vector& vector);
