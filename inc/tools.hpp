@@ -18,7 +18,6 @@ const std::pair<double, double> INFINITY_SOLUTION = {INFINITY, INFINITY};
 bool is_equal_doubles(double a, double b);
 bool is_double_in_segment(double number, double a, double b);
 double det_two(double a11, double a12, double a21, double a22);
-bool are_points_collinear(const Point& point1, const Point& point2, const Point& point3);
 char sign(double number);
 std::pair<double, double> solve_system_3eq_2var(const Vector& col1, const Vector& col2, const Vector& col3);
 std::pair<double, double> solve_system_2eq_2var(const Vector& row1, const Vector& row2);

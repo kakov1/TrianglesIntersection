@@ -1,8 +1,8 @@
 #include "tools.hpp"
+#include "point.hpp"
 #include "vector.hpp"
-#include <utility>
-#include <iostream>
 #include <algorithm>
+#include <utility>
 #include <cmath>
 
 bool is_equal_doubles(const double a, const double b) {
@@ -16,13 +16,6 @@ bool is_double_in_segment(double number, double a, double b) {
 
 double det_two(const double a11, const double a12, const double a21, const double a22) {
     return a11 * a22 - a21 * a12;
-}
-
-bool are_points_collinear(const Point& point1, const Point& point2, const Point& point3) {
-    Vector side1(point1, point2);
-    Vector side2(point2, point3);
-    
-    return (side1.is_collinear(side2));
 }
 
 char sign(double number) {

@@ -1,7 +1,5 @@
 #include "triangle.hpp"
 #include "tools.hpp"
-#include "segment.hpp"
-#include "point.hpp"
 #include <iostream>
 
 Point Triangle::get_a() const { return a; }
@@ -32,7 +30,7 @@ Triangle::Triangle(const Point& point1, const Point& point2, const Point& point3
 }
 
 bool Triangle::is_valid() const {
-    return are_points_collinear(a, b, c);
+    return a.are_points_collinear(b, c);
 }
 
 bool Triangle::is_degenerate() const {
@@ -44,7 +42,7 @@ bool Triangle::is_point() const {
 }
 
 bool Triangle::is_segment() const {
-    return are_points_collinear(a, b, c);
+    return a.are_points_collinear(b, c);
 }
 
 bool Triangle::is_equal(const Triangle& triangle) const {
@@ -115,7 +113,7 @@ bool Triangle::is_intersect_in_same_plane(const Triangle& triangle) const {
 
     for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
         Vector side(get_vertice(index2), get_vertice(index1));
-        Vector perp_side = side.find_perp_in_plane(plane);
+        Vector perp_side = plane.find_perp_in_plane(side);
 
         compute_interval(Point(perp_side.get_x(),
                                perp_side.get_y(),
@@ -129,7 +127,7 @@ bool Triangle::is_intersect_in_same_plane(const Triangle& triangle) const {
     }
     for (int index1 = 0, index2 = 2; index1 < 3; index2 = index1, index1++) {
         Vector side(triangle.get_vertice(index2), triangle.get_vertice(index1));
-        Vector perp_side = side.find_perp_in_plane(triangle.plane);
+        Vector perp_side = triangle.plane.find_perp_in_plane(side);
 
         compute_interval(Point(perp_side.get_x(),
                                perp_side.get_y(),

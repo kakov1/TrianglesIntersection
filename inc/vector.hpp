@@ -1,9 +1,6 @@
 #pragma once
 
 #include "point.hpp"
-#include <cmath>
-
-class Plane;
 
 class Vector {
     private:
@@ -31,7 +28,6 @@ class Vector {
         double vector_module() const;
         double length() const;
         Vector vector_product(const Vector& vector) const;
-        Vector find_perp_in_plane(const Plane& plane) const;
         Vector operator+(const Vector& vector) const;
         Vector operator-(const Vector& vector) const;
         Vector operator*(double number) const;

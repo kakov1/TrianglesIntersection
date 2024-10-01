@@ -1,6 +1,3 @@
-#include "plane.hpp"
-#include "tools.hpp"
-#include "line.hpp"
 #include "triangle.hpp"
 #include <vector>
 #include <iostream>

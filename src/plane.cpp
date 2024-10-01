@@ -1,6 +1,5 @@
 #include "plane.hpp"
-#include "vector.hpp"
-#include "line.hpp"
+#include "tools.hpp"
 #include <iostream>
 #include <cmath>
 
@@ -28,6 +27,10 @@ Plane::Plane(const Point& point1, const Point& point2, const Point& point3) {
     d = -(point1.get_x()*normal_x)-(point1.get_y()*normal_y)-(point1.get_z()*normal_z);
 
     normal = Vector(normal_x, normal_y, normal_z);
+}
+
+Vector Plane::find_perp_in_plane(const Vector& vector) const {
+    return vector.vector_product(get_normal());
 }
 
 bool Plane::is_equal(const Plane& plane) const {

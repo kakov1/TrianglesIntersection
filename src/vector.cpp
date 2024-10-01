@@ -1,8 +1,6 @@
 #include "vector.hpp"
 #include "tools.hpp"
-#include "iostream"
-#include "plane.hpp"
-#include <cassert>
+#include <iostream>
 
 double Vector::get_x() const {
     return x;
@@ -49,8 +47,6 @@ Vector operator*(double number, const Vector& vector) {
 }
 
 Vector Vector::operator/(double number) const {
-    assert(number != 0);
-
     return Vector::operator*(1/number);
 }
 
@@ -115,10 +111,6 @@ bool Vector::is_skew(const Vector& vector) const {
 
 double Vector::scalar_product(const Vector& vector) const {
     return x * vector.x + y * vector.y + z * vector.z;
-}
-
-Vector Vector::find_perp_in_plane(const Plane& plane) const {
-    return vector_product(plane.get_normal());
 }
 
 void Vector::print() const {

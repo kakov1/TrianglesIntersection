@@ -1,8 +1,10 @@
 #pragma once
 
 #include "segment.hpp"
+#include "vector.hpp"
 #include "point.hpp"
 #include "plane.hpp"
+#include "line.hpp"
 
 class Triangle {
     private:

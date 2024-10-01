@@ -1,8 +1,7 @@
 #pragma once
 
-#include "tools.hpp"
-#include "line.hpp"
 #include "vector.hpp"
+#include "line.hpp"
 #include "point.hpp"
 
 class Vector;
@@ -26,5 +25,6 @@ class Plane {
         bool is_point_under_plane(const Point& point) const;
         bool is_point_belong(const Point& point) const;
         void print() const;
+        Vector find_perp_in_plane(const Vector& vector) const;
         int normalize();
 };

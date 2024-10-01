@@ -3,9 +3,6 @@
 #include "point.hpp"
 #include "line.hpp"
 #include <cmath>
-#include <cassert>
-#include <algorithm>
-#include <variant>
 #include <iostream>
 
 Point Segment::get_start_point() const { return start_point; }
@@ -122,15 +119,15 @@ Segment Segment::not_collinear_segments_intersection(const Segment& segment) con
     }
 
     std::pair<double, double> params_of_intersection = 
-    solve_system_3eq_2var({start_point.get_x() - end_point.get_x(),
+    solve_system_3eq_2var(Vector(start_point.get_x() - end_point.get_x(),
                            segment.end_point.get_x() - segment.start_point.get_x(),
-                           segment.end_point.get_x() - end_point.get_x()},
-                          {start_point.get_y() - end_point.get_y(),
+                           segment.end_point.get_x() - end_point.get_x()),
+                          Vector(start_point.get_y() - end_point.get_y(),
                            segment.end_point.get_y() - segment.start_point.get_y(),
-                           segment.end_point.get_y() - end_point.get_y()},
-                          {start_point.get_z() - end_point.get_z(),
+                           segment.end_point.get_y() - end_point.get_y()),
+                          Vector(start_point.get_z() - end_point.get_z(),
                            segment.end_point.get_z() - segment.start_point.get_z(),
-                           segment.end_point.get_z() - end_point.get_z()}
+                           segment.end_point.get_z() - end_point.get_z())
                          );
  
     if (is_nan_solution(params_of_intersection)) {

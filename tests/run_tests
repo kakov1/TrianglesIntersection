@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Wait..."
+for i in {1..13};
+    do 
+    echo "test${i}:";
+    echo "$(../build/src/main < tests/test${i}.txt)";
+    done

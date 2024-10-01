@@ -2,7 +2,6 @@
 
 #include "point.hpp"
 #include "vector.hpp"
-#include <variant>
 
 class Segment {
     private:

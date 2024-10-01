@@ -30,3 +30,10 @@ void Point::print() const {
 bool Point::is_valid() const {
     return (!std::isnan(x) && !std::isnan(y) && !std::isnan(z));
 }
+
+bool Point::are_points_collinear(const Point& point1, const Point& point2) const {
+    Vector side1(*this, point1);
+    Vector side2(point1, point2);
+    
+    return (side1.is_collinear(side2));
+}

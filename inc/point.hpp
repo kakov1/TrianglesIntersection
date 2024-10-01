@@ -17,4 +17,5 @@ class Point {
         bool is_equal(const Point& point) const;
         bool is_valid() const;
         bool is_nan() const; 
+        bool are_points_collinear(const Point& point1, const Point& point2) const;
 };
