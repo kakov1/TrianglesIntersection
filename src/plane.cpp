@@ -35,7 +35,13 @@ Vector Plane::find_perp_in_plane(const Vector& vector) const {
 
 bool Plane::is_equal(const Plane& plane) const {
     if (is_collinear(plane)) {
-        return is_equal_doubles(d, plane.d);
+        double coefficient = normal.vector_module()/plane.normal.vector_module();
+        if (sign(plane.normal.get_x()) == sign(normal.get_x())) {
+            return is_equal_doubles(d, plane.d*coefficient);
+        }
+        else {
+            return is_equal_doubles(d, -plane.d*coefficient);
+        }
     }
     return false;
 }
@@ -50,15 +56,14 @@ bool Plane::is_collinear(const Plane& plane) const {
     return normal.is_collinear(plane.normal);
 }
 
-int Plane::normalize() {
+Plane Plane::normalize() const {
     double coefficient = d;
 
-    normal.normalize();
-    d /= coefficient;
+    if (coefficient < 0) {
+        coefficient *= (-1);
+    }
 
-    if (d < 0) d *= (-1);
-
-    return 0;
+    return Plane(normal/coefficient, 1);
 }
 
 void Plane::print() const {

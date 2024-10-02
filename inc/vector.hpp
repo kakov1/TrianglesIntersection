@@ -22,7 +22,7 @@ class Vector {
         bool is_collinear(const Vector& vector) const;
         bool is_skew(const Vector& vector) const;
         bool is_codirectional(const Vector& vector) const;
-        int normalize();
+        Vector normalize() const;
         double scalar_product(const Vector& vector) const;
         double triple_product(const Vector& a, const Vector& b) const;
         double vector_module() const;

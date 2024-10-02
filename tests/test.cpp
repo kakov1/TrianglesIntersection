@@ -114,6 +114,10 @@ TEST(tests, test13) {
     ASSERT_TRUE(test(13) == get_answer(13));
 }
 
+TEST(tests, test14) {
+    ASSERT_TRUE(test(14) == get_answer(14));
+}
+
 int main(int argc, char* argv[]) {
     ::testing::InitGoogleMock(&argc, argv);
     return RUN_ALL_TESTS();

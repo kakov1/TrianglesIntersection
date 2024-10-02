@@ -26,5 +26,5 @@ class Plane {
         bool is_point_belong(const Point& point) const;
         void print() const;
         Vector find_perp_in_plane(const Vector& vector) const;
-        int normalize();
+        Plane normalize() const;
 };

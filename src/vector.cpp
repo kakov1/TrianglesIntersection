@@ -54,14 +54,9 @@ Vector operator/(double number, const Vector& vector) {
     return vector/number;
 }
 
-int Vector::normalize() {
+Vector Vector::normalize() const {
     double coefficient = vector_module();
-
-    x /= coefficient;
-    y /= coefficient;
-    z /= coefficient;
-
-    return 0; 
+    return Vector(x / coefficient, y / coefficient, z / coefficient); 
 }
 
 bool Vector::is_equal(const Vector& vector) const{
