@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+namespace Geometry {
 class Point {
     private:
         double x = NAN, y = NAN, z = NAN;
@@ -19,3 +20,4 @@ class Point {
         bool is_nan() const; 
         bool are_points_collinear(const Point& point1, const Point& point2) const;
 };
+}

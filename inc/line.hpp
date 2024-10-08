@@ -4,6 +4,7 @@
 #include "vector.hpp"
 #include "tools.hpp"
 
+namespace Geometry {
 class Line {
     private:
         Point start_point = NAN_POINT;
@@ -22,3 +23,4 @@ class Line {
         bool is_parallel(const Line& line) const;
         void print() const;
 };
+}

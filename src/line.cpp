@@ -4,30 +4,30 @@
 #include <cassert>
 #include <iostream>
 
-Point Line::get_start_point() const { return start_point; }
-Vector Line::get_direction_vector() const { return direction_vector; }
+Geometry::Point Geometry::Line::get_start_point() const { return start_point; }
+Geometry::Vector Geometry::Line::get_direction_vector() const { return direction_vector; }
 
-Line::Line(const Point& point1, const Point& point2) {
+Geometry::Line::Line(const Point& point1, const Point& point2) {
     start_point = point1;
     direction_vector = {point1, point2};
 }
 
-Line::Line(const Point& point, const Vector& vector) {
+Geometry::Line::Line(const Point& point, const Vector& vector) {
     start_point = point;
     direction_vector = vector;
 }
 
-bool Line::is_equal(const Line& line) const {
+bool Geometry::Line::is_equal(const Line& line) const {
     return line.direction_vector.is_collinear({start_point, line.start_point}) &&
            line.direction_vector.is_collinear(direction_vector);
 }
 
-bool Line::is_parallel(const Line& line) const {
+bool Geometry::Line::is_parallel(const Line& line) const {
     return line.direction_vector.is_collinear({start_point, line.start_point});
 }
 
 
-Point Line::lines_intersection(const Line& line) const {
+Geometry::Point Geometry::Line::lines_intersection(const Line& line) const {
     std::pair<double, double> params_of_intersection = 
     solve_system_3eq_2var({direction_vector.get_x(), -line.direction_vector.get_x(),
                            line.start_point.get_x() - start_point.get_x()},
@@ -51,7 +51,7 @@ Point Line::lines_intersection(const Line& line) const {
     }
 }   
 
-bool Line::is_point_belong(const Point& point) const {
+bool Geometry::Line::is_point_belong(const Point& point) const {
     if (solve_system_3eq_2var(Vector(point.get_x(), -direction_vector.get_x(), start_point.get_x()),
                               Vector(point.get_y(), -direction_vector.get_y(), start_point.get_y()),
                               Vector(point.get_z(), -direction_vector.get_z(), start_point.get_z()))
@@ -61,7 +61,7 @@ bool Line::is_point_belong(const Point& point) const {
     return false;
 }
 
-void Line::print() const {
+void Geometry::Line::print() const {
     std::cout << "-------------\n";
     std::cout << "Line:\nstart_point: ";
     start_point.print();

@@ -4,8 +4,7 @@
 #include "line.hpp"
 #include "point.hpp"
 
-class Vector;
-
+namespace Geometry {
 class Plane {
     private:
         Vector normal;
@@ -20,7 +19,7 @@ class Plane {
 
         bool is_equal(const Plane& plane) const;
         bool is_collinear(const Plane& plane) const;
-        Line intersection(const Plane& plane) const;
+        Geometry::Line intersection(const Plane& plane) const;
         bool is_point_over_plane(const Point& point) const;
         bool is_point_under_plane(const Point& point) const;
         bool is_point_belong(const Point& point) const;
@@ -28,3 +27,4 @@ class Plane {
         Vector find_perp_in_plane(const Vector& vector) const;
         Plane normalize() const;
 };
+}

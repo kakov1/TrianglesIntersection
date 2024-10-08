@@ -4,7 +4,7 @@ project("Triangles_intersection")
 set(CMAKE_CXX_STANDARD 20)
 
 add_library(geometry ./src/line.cpp ./src/plane.cpp ./src/point.cpp ./src/segment.cpp
-                     ./src/tools.cpp ./src/triangle.cpp ./src/vector.cpp)
+                     ./src/tools.cpp ./src/triangle.cpp ./src/vector.cpp ./src/octree.cpp)
 
 target_include_directories(geometry PUBLIC ./inc)
 

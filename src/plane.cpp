@@ -3,16 +3,16 @@
 #include <iostream>
 #include <cmath>
 
-Vector Plane::get_normal() const { return normal; }
+Geometry::Vector Geometry::Plane::get_normal() const { return normal; }
 
-double Plane::get_d() const { return d; }
+double Geometry::Plane::get_d() const { return d; }
 
-Plane::Plane(const Vector& normal_vector, const double coeff_d) {
+Geometry::Plane::Plane(const Vector& normal_vector, const double coeff_d) {
     normal = normal_vector;
     d = coeff_d;
 }
 
-Plane::Plane(const Point& point1, const Point& point2, const Point& point3) {
+Geometry::Plane::Plane(const Point& point1, const Point& point2, const Point& point3) {
     if (point1.is_equal(NAN_POINT) && point2.is_equal(NAN_POINT) && point3.is_equal(NAN_POINT)) {
         normal = NAN_VECTOR;
         d = NAN;
@@ -29,11 +29,11 @@ Plane::Plane(const Point& point1, const Point& point2, const Point& point3) {
     normal = Vector(normal_x, normal_y, normal_z);
 }
 
-Vector Plane::find_perp_in_plane(const Vector& vector) const {
+Geometry::Vector Geometry::Plane::find_perp_in_plane(const Vector& vector) const {
     return vector.vector_product(get_normal());
 }
 
-bool Plane::is_equal(const Plane& plane) const {
+bool Geometry::Plane::is_equal(const Plane& plane) const {
     if (is_collinear(plane)) {
         double coefficient = normal.vector_module()/plane.normal.vector_module();
         if (sign(plane.normal.get_x()) == sign(normal.get_x())) {
@@ -46,17 +46,17 @@ bool Plane::is_equal(const Plane& plane) const {
     return false;
 }
 
-bool Plane::is_point_belong(const Point& point) const {
+bool Geometry::Plane::is_point_belong(const Point& point) const {
     return is_equal_doubles(normal.get_x() * point.get_x() +
                             normal.get_y() * point.get_y() +
                             normal.get_z() * point.get_z() + d, 0);
 }
 
-bool Plane::is_collinear(const Plane& plane) const {
+bool Geometry::Plane::is_collinear(const Plane& plane) const {
     return normal.is_collinear(plane.normal);
 }
 
-Plane Plane::normalize() const {
+Geometry::Plane Geometry::Plane::normalize() const {
     double coefficient = d;
 
     if (coefficient < 0) {
@@ -66,27 +66,27 @@ Plane Plane::normalize() const {
     return Plane(normal/coefficient, 1);
 }
 
-void Plane::print() const {
+void Geometry::Plane::print() const {
     std::cout << normal.get_x() << "x" << sign(normal.get_y()) <<
                  fabs(normal.get_y()) << "y" << sign(normal.get_z()) <<
                  fabs(normal.get_z()) << "z" << sign(d) << fabs(d) << "=0" << std::endl;
 }
 
-bool Plane::is_point_over_plane(const Point& point) const {
+bool Geometry::Plane::is_point_over_plane(const Point& point) const {
     double result = normal.get_x() * point.get_x() +
                     normal.get_y() * point.get_y() +
                     normal.get_z() * point.get_z() + d;
     return (result > 0 && !is_equal_doubles(result, 0));
 }
 
-bool Plane::is_point_under_plane(const Point& point) const {
+bool Geometry::Plane::is_point_under_plane(const Point& point) const {
     double result = normal.get_x() * point.get_x() +
                     normal.get_y() * point.get_y() +
                     normal.get_z() * point.get_z() + d;
     return (result < 0 && !is_equal_doubles(result, 0));
 }
 
-Line Plane::intersection(const Plane& plane) const {
+Geometry::Line Geometry::Plane::intersection(const Plane& plane) const {
     Vector n = normal.vector_product(plane.normal); 
 
     if (n.vector_module() == 0) {

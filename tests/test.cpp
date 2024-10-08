@@ -1,13 +1,15 @@
-#include "triangle.hpp"
+#include "octree.hpp"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <fstream>
 #include <vector>
+#include <list>
+#include <set>
 
 const int OPEN_ERROR = -1;
 
-std::vector<size_t> get_answer(int test_number) {
-    std::vector<size_t> answers;
+std::set<size_t> get_answer(int test_number) {
+    std::set<size_t> answers;
     
     std::fstream answer_file("../../tests/tests/answer" + std::to_string(test_number) + ".txt");
 
@@ -18,15 +20,13 @@ std::vector<size_t> get_answer(int test_number) {
     size_t buf;
 
     while (answer_file >> buf) {
-        answers.push_back(buf);
+        answers.insert(buf);
     }
     
     return answers;
-
-
 }
-std::vector<size_t> test(int test_number) {
-    std::vector<size_t> answer;
+
+std::set<size_t> test(int test_number) {
     std::fstream test_file("../../tests/tests/test" + std::to_string(test_number) + ".txt");
 
     if (test_file.fail()) {
@@ -36,30 +36,41 @@ std::vector<size_t> test(int test_number) {
     std::cin.rdbuf(test_file.rdbuf()); 
 
     size_t triangles_number;
-
     std::cin >> triangles_number;
+    std::list<std::pair<Geometry::Triangle, size_t>> triangles;
 
-    std::vector<Triangle> triangles;
+    double x_min, y_min, z_min, x_max, y_max, z_max;
 
     for (int i = 0; i < triangles_number; i++) {
         double x, y, z;
-        std::vector<Point> triangle_points;
+        Geometry::Point triangle_points[3];
         for (int j = 0; j < 3; j++) {
             std::cin >> x >> y >> z;
-            triangle_points.push_back(Point(x, y, z));
+            triangle_points[j] = Geometry::Point(x, y, z);
+            if (i == 0) {
+                x_min = x;
+                y_min = y;
+                z_min = z;
+                x_max = x;
+                y_max = y;
+                z_max = z;
+            }
+            x_min = x<x_min?x:x_min;
+            y_min = y<y_min?y:y_min;
+            z_min = z<z_min?z:z_min;
+            x_max = x>x_max?x:x_max;
+            y_max = y>y_max?y:y_max;
+            z_max = z>z_max?z:z_max;
         }
-        triangles.emplace_back(triangle_points[0], triangle_points[1], triangle_points[2]);
+        triangles.emplace_back(Geometry::Triangle(triangle_points[0], triangle_points[1], triangle_points[2]), i);
     }
 
-    for (int i = 0; i < triangles_number; i++) {
-        for (int j = 0; j < triangles_number; j++) {
-            if (i != j && triangles[i].is_intersect(triangles[j])) {
-                answer.push_back(i);
-                break;
-            }
-        }
-    }
-    return answer;
+    Octree::Octree tree = Octree::Octree(triangles, Octree::Cube(Geometry::Point(x_min, y_min, z_min),
+                                                                 Geometry::Point(x_max, y_max, z_max)));                                                            
+    
+    std::set<size_t> res = tree.get_intersections();
+
+    return res;
 }
 
 TEST(tests, test1) {

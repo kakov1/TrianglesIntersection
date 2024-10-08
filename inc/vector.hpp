@@ -2,6 +2,7 @@
 
 #include "point.hpp"
 
+namespace Geometry {
 class Vector {
     private:
         double x = NAN;
@@ -22,7 +23,6 @@ class Vector {
         bool is_collinear(const Vector& vector) const;
         bool is_skew(const Vector& vector) const;
         bool is_codirectional(const Vector& vector) const;
-        Vector normalize() const;
         double scalar_product(const Vector& vector) const;
         double triple_product(const Vector& a, const Vector& b) const;
         double vector_module() const;
@@ -37,3 +37,4 @@ class Vector {
 
 Vector operator*(double number, const Vector& vector);
 Vector operator/(double number, const Vector& vector);
+}
