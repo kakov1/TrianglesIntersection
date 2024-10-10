@@ -29,12 +29,9 @@ void Octree::Cube::partition(Cube cubes[8]) const {
 }
 
 bool Octree::Cube::is_point_in_cube(const Point& point) const {
-    return (point.get_x() > min.get_x() || is_equal_doubles(point.get_x(), min.get_x())) &&
-           (point.get_x() < max.get_x() || is_equal_doubles(point.get_x(), max.get_x())) &&
-           (point.get_y() > min.get_y() || is_equal_doubles(point.get_y(), min.get_y())) &&
-           (point.get_y() < max.get_y() || is_equal_doubles(point.get_y(), max.get_y())) &&
-           (point.get_z() > min.get_z() || is_equal_doubles(point.get_z(), min.get_z())) &&
-           (point.get_z() < max.get_z() || is_equal_doubles(point.get_z(), max.get_z()));
+    return point.get_x() > min.get_x() && point.get_x() < max.get_x() &&
+           point.get_y() > min.get_y() && point.get_y() < max.get_y() &&
+           point.get_z() > min.get_z() && point.get_z() < max.get_z();
 }  
 
 bool Octree::Cube::is_triangle_in_cube(const Triangle& triangle) const {
@@ -56,7 +53,7 @@ Octree::Node::Node(const triangles_list& objects, const Cube& region) {
 
 Octree::Node::~Node() {
     if (has_child) {
-        for (Node* child : childs_) {
+        for (Node* child : children_) {
             delete child;
         }
     }
@@ -69,7 +66,7 @@ Octree::Node* Octree::Node::create_node(const triangles_list& triangles, const C
 }
 
 void Octree::Node::build_tree() {
-    if (triangles_.size() <= 10) {
+    if (triangles_.size() <= 3) {
         return;
     }
 
@@ -101,19 +98,18 @@ void Octree::Node::build_tree() {
     for (int child_num = 0; child_num < 8; child_num++) {
         if (!triangles_partition[child_num].empty()) {
             has_child = true;
-            childs_[child_num] = create_node(triangles_partition[child_num], cubes[child_num]);
-            childs_[child_num]->build_tree();
+            children_[child_num] = create_node(triangles_partition[child_num], cubes[child_num]);
+            children_[child_num]->build_tree();
         }
         else {
-            childs_[child_num] = nullptr;
+            children_[child_num] = nullptr;
         }
     }
 }
 
-void Octree::Node::get_intersections_between_cubes(std::set<size_t>& result,
-                                                   const triangles_list& triangles) const {
-    if (!triangles_.empty() && !triangles.empty()) {
-        triangles_list triangles_copy = triangles;
+void Octree::Node::get_intersections_in_cube(std::set<size_t>& result) const {
+    if (!triangles_.empty()) {
+        triangles_list triangles_copy = triangles_;
 
         for (auto triangle1 : triangles_) {
             for (auto triangle2 : triangles_copy) {
@@ -125,7 +121,7 @@ void Octree::Node::get_intersections_between_cubes(std::set<size_t>& result,
                     }
                 }
             }
-            if (triangles_copy.size() != 0) {
+            if (!triangles_copy.empty()) {
                 triangles_copy.pop_front();
             }
         }
@@ -135,10 +131,23 @@ void Octree::Node::get_intersections_between_cubes(std::set<size_t>& result,
 void Octree::Node::get_intersections_with_children(std::set<size_t>& result,
                                                    const triangles_list& triangles) const {
     if (has_child) {
-        for (Node* child : childs_) {
+        for (Node* child : children_) {
             if (child != nullptr) {
-                child->get_intersections_between_cubes(result, triangles);
-                child->get_intersections_with_children(result, triangles);
+
+                if (!child->triangles_.empty()) {
+                    for (auto triangle1 : triangles) {
+                        for (auto triangle2 : child->triangles_) {
+                            if (child->region_.is_part_of_triangle_in_cube(triangle1.first)) {
+                                if (triangle1.first.is_intersect(triangle2.first)) {
+                                    result.insert(triangle1.second);
+                                    result.insert(triangle2.second);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            child->get_intersections_with_children(result, triangles);
             }
         }
     }
@@ -152,10 +161,10 @@ std::set<size_t> Octree::Node::get_intersections() const {
     std::set<size_t> result;
 
     get_intersections_with_children(result, triangles_);
-    get_intersections_between_cubes(result, triangles_);
+    get_intersections_in_cube(result);
 
     if (has_child) {
-        for (Node* child : childs_) {
+        for (Node* child : children_) {
             if (child != nullptr) {
                 std::set<size_t> result_child = child->get_intersections();
                 for (size_t triangle_num : result_child) {
@@ -169,7 +178,8 @@ std::set<size_t> Octree::Node::get_intersections() const {
 }
 
 Octree::Octree::Octree(const triangles_list& objects, const Cube& region) {
-    root = root->create_node(objects, region);
+    root = root->create_node(objects, Cube(region.get_min() + Vector(-1, -1, -1),
+                                           region.get_max() + Vector(1, 1, 1)));
     root->build_tree();
 }
 

@@ -6,7 +6,7 @@ Geometry::Point Geometry::Triangle::get_a() const { return a; }
 Geometry::Point Geometry::Triangle::get_b() const { return b; }
 Geometry::Point Geometry::Triangle::get_c() const { return c; }
 
-Geometry::Triangle::Triangle(const Geometry::Point& point1, const Geometry::Point& point2, const Geometry::Point& point3) {
+Geometry::Triangle::Triangle(const Point& point1, const Point& point2, const Point& point3) {
     a = point1;
     b = point2;
     c = point3;
@@ -73,10 +73,10 @@ Geometry::Point Geometry::Triangle::get_vertice(int number) const {
     }
 }
 
-void Geometry::Triangle::compute_interval(Geometry::Point point, double& min, double& max) const {
-    min = max = Geometry::Vector({0, 0, 0}, get_vertice(0)).scalar_product(Geometry::Vector({0, 0, 0}, point));
+void Geometry::Triangle::compute_interval(Point point, double& min, double& max) const {
+    min = max = Vector({0, 0, 0}, get_vertice(0)).scalar_product(Vector({0, 0, 0}, point));
     for (int i = 1; i < 3; i++) {
-        double value = Geometry::Vector({0, 0, 0}, get_vertice(i)).scalar_product(Geometry::Vector({0, 0, 0}, point));
+        double value = Vector({0, 0, 0}, get_vertice(i)).scalar_product(Vector({0, 0, 0}, point));
         if (value < min) {
             min = value;
         }
@@ -86,7 +86,7 @@ void Geometry::Triangle::compute_interval(Geometry::Point point, double& min, do
     }
 }
 
-bool Geometry::Triangle::is_point_belong(const Geometry::Point& point) const {
+bool Geometry::Triangle::is_point_belong(const Point& point) const {
     if (!plane.is_point_belong(point)) {
         return false;
     }
@@ -115,10 +115,10 @@ bool Geometry::Triangle::is_intersect_in_same_plane(const Triangle& triangle) co
         Vector side(get_vertice(index2), get_vertice(index1));
         Vector perp_side = plane.find_perp_in_plane(side);
 
-        compute_interval(Geometry::Point(perp_side.get_x(),
+        compute_interval(Point(perp_side.get_x(),
                                perp_side.get_y(),
                                perp_side.get_z()), min1, max1);
-        triangle.compute_interval(Geometry::Point(perp_side.get_x(),
+        triangle.compute_interval(Point(perp_side.get_x(),
                                         perp_side.get_y(),
                                         perp_side.get_z()), min2, max2);
         if (max2 < min1 || max1 < min2) {
@@ -129,10 +129,10 @@ bool Geometry::Triangle::is_intersect_in_same_plane(const Triangle& triangle) co
         Vector side(triangle.get_vertice(index2), triangle.get_vertice(index1));
         Vector perp_side = triangle.plane.find_perp_in_plane(side);
 
-        compute_interval(Geometry::Point(perp_side.get_x(),
+        compute_interval(Point(perp_side.get_x(),
                                perp_side.get_y(),
                                perp_side.get_z()), min1, max1);
-        triangle.compute_interval(Geometry::Point(perp_side.get_x(),
+        triangle.compute_interval(Point(perp_side.get_x(),
                                         perp_side.get_y(),
                                         perp_side.get_z()), min2, max2);
         if (max2 < min1 || max1 < min2) {
@@ -155,9 +155,9 @@ Geometry::Segment Geometry::Triangle::intersection_line_in_same_plane(const Line
         return {a, c};
     }
 
-    Geometry::Point intersection_point_ab = line.lines_intersection({a, b});
-    Geometry::Point intersection_point_bc = line.lines_intersection({b, c});
-    Geometry::Point intersection_point_ac = line.lines_intersection({a, c});
+    Point intersection_point_ab = line.lines_intersection({a, b});
+    Point intersection_point_bc = line.lines_intersection({b, c});
+    Point intersection_point_ac = line.lines_intersection({a, c});
 
     if (!Segment(a, b).is_point_belong(intersection_point_ab)) {
         intersection_point_ab = NAN_POINT;
@@ -212,7 +212,7 @@ bool Geometry::Triangle::is_intersect_segment(const Segment& segment) const {
 
     Vector intersection = Vector(segment.get_start_point()) + t * segment.get_direction_vector();
     
-    return segment.is_point_belong(Geometry::Point(intersection.get_x(),
+    return segment.is_point_belong(Point(intersection.get_x(),
                                          intersection.get_y(),
                                          intersection.get_z()));
 }

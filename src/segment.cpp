@@ -11,7 +11,7 @@ Geometry::Point Geometry::Segment::get_end_point() const { return end_point; }
 
 Geometry::Vector Geometry::Segment::get_direction_vector() const { return direction_vector; }
 
-Geometry::Segment::Segment(const Geometry::Point& point1, const Geometry::Point& point2) {
+Geometry::Segment::Segment(const Point& point1, const Point& point2) {
             start_point = point1;
             end_point = point2;
             direction_vector = {point2.get_x() - point1.get_x(),
@@ -19,13 +19,13 @@ Geometry::Segment::Segment(const Geometry::Point& point1, const Geometry::Point&
                                 point2.get_z() - point1.get_z()};
 }
 
-Geometry::Segment::Segment(const Geometry::Point& point) {
+Geometry::Segment::Segment(const Point& point) {
     start_point = point;
     end_point = point;
     direction_vector = {0, 0, 0};
 }
 
-bool Geometry::Segment::is_point_belong(const Geometry::Point& point) const {
+bool Geometry::Segment::is_point_belong(const Point& point) const {
     return (Line(start_point, end_point).is_point_belong(point) && 
             is_double_in_segment(point.get_x(), start_point.get_x(), end_point.get_x()) &&
             is_double_in_segment(point.get_y(), start_point.get_y(), end_point.get_y()) &&
@@ -101,7 +101,7 @@ Geometry::Segment Geometry::Segment::collinear_segments_intersection(const Segme
     return NAN_SEGMENT;
 }
 
-Geometry::Segment Geometry::Segment::intersection_with_point(const Geometry::Point& point) const {
+Geometry::Segment Geometry::Segment::intersection_with_point(const Point& point) const {
     if (is_point_belong(point)) {
         return Segment(point);
     }

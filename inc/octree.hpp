@@ -8,9 +8,9 @@
 #include <iterator>
 #include <set>
 
-const double MIN_SIZE = 1;
-
 namespace Octree {
+
+    const double MIN_SIZE = 1;
 
     using namespace Geometry;
     using triangles_list = std::list<std::pair<Triangle, size_t>>;
@@ -37,7 +37,7 @@ namespace Octree {
         public:
             Cube region_;
             triangles_list triangles_;
-            Node* childs_[8];
+            Node* children_[8];
             bool has_child = false;
 
             Node(const triangles_list& objects, const Cube& region);
@@ -45,10 +45,9 @@ namespace Octree {
 
             void build_tree();
             Node* create_node(const triangles_list& triangles, const Cube& region);
-            void get_intersections_between_cubes(std::set<size_t>& result,
-                                                 const triangles_list& triangles) const;
+            void get_intersections_in_cube(std::set<size_t>& result) const;
             void get_intersections_with_children(std::set<size_t>& result,
-                                                 const triangles_list& triangles) const;
+                                                 const triangles_list& parent_triangles) const;
             std::set<size_t> get_intersections() const;
     };
 

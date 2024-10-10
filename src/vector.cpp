@@ -30,11 +30,11 @@ Geometry::Vector::Vector(const Point& point) {
     z = point.get_z();
 }
 
-Geometry::Vector Geometry::Vector::operator+(const Geometry::Vector& vector) const {
+Geometry::Vector Geometry::Vector::operator+(const Vector& vector) const {
     return {x + vector.x, y + vector.y, z + vector.z};
 }
 
-Geometry::Vector Geometry::Vector::operator-(const Geometry::Vector& vector) const {
+Geometry::Vector Geometry::Vector::operator-(const Vector& vector) const {
     return {x - vector.x, y - vector.y, z - vector.z};
 }
 
@@ -42,7 +42,7 @@ Geometry::Vector Geometry::Vector::operator*(double number) const {
     return {number * x, number * y, number * z};
 }
 
-Geometry::Vector Geometry::operator*(double number, const Geometry::Vector& vector) {
+Geometry::Vector Geometry::operator*(double number, const Vector& vector) {
     return vector * number;
 }
 
@@ -50,11 +50,11 @@ Geometry::Vector Geometry::Vector::operator/(double number) const {
     return Geometry::Vector::operator*(1/number);
 }
 
-Geometry::Vector Geometry::operator/(double number, const Geometry::Vector& vector) {
+Geometry::Vector Geometry::operator/(double number, const Vector& vector) {
     return vector/number;
 }
 
-bool Geometry::Vector::is_equal(const Geometry::Vector& vector) const{
+bool Geometry::Vector::is_equal(const Vector& vector) const{
     return (is_equal_doubles(x, vector.x) && 
             is_equal_doubles(y, vector.y) &&
             is_equal_doubles(z, vector.z));
@@ -64,7 +64,7 @@ Geometry::Vector Geometry::Vector::opposite() const {
     return {-x, -y, -z};
 }
 
-Geometry::Vector Geometry::Vector::vector_product(const Geometry::Vector& vector) const {
+Geometry::Vector Geometry::Vector::vector_product(const Vector& vector) const {
     return {det_two(y, z,  vector.y, vector.z),
             -det_two(x, z,  vector.x, vector.z),
             det_two(x, y,  vector.x, vector.y)};
@@ -74,14 +74,14 @@ double Geometry::Vector::length() const {
     return pow(pow(x, 2) + pow(y, 2) + pow(z, 2), 0.5);
 }
 
-bool Geometry::Vector::is_codirectional(const Geometry::Vector& vector) const {
+bool Geometry::Vector::is_codirectional(const Vector& vector) const {
     if (!is_collinear(vector)) {
         return false;
     }
     return is_equal_doubles(length()*vector.length(), scalar_product(vector));
 }
 
-double Geometry::Vector::triple_product(const Geometry::Vector& a, const Geometry::Vector& b) const {
+double Geometry::Vector::triple_product(const Vector& a, const Vector& b) const {
     return x * det_two(a.y, a.z,  b.y, b.z)-
            y * det_two(a.x, a.z,  b.x, b.z)+
            z * det_two(a.x, a.y,  b.x, b.y);
@@ -91,15 +91,15 @@ double Geometry::Vector::vector_module() const {
     return (pow(pow(x, 2) + pow(y, 2) + pow(z, 2), 0.5));
 }
 
-bool Geometry::Vector::is_collinear(const Geometry::Vector& vector) const {
+bool Geometry::Vector::is_collinear(const Vector& vector) const {
     return (vector_product(vector).vector_module() == 0);   
 }
 
-bool Geometry::Vector::is_skew(const Geometry::Vector& vector) const {
+bool Geometry::Vector::is_skew(const Vector& vector) const {
     return triple_product(vector, {x, y, z}) == 0;
 }
 
-double Geometry::Vector::scalar_product(const Geometry::Vector& vector) const {
+double Geometry::Vector::scalar_product(const Vector& vector) const {
     return x * vector.x + y * vector.y + z * vector.z;
 }
 
