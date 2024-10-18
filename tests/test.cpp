@@ -10,8 +10,9 @@ const int OPEN_ERROR = -1;
 
 std::set<size_t> get_answer(int test_number) {
     std::set<size_t> answers;
-    
-    std::fstream answer_file("../../tests/tests/answer" + std::to_string(test_number) + ".txt");
+
+    std::fstream answer_file(
+    "../../tests/tests/answer" + std::to_string(test_number) + ".txt");
 
     if (answer_file.fail()) {
         throw OPEN_ERROR;
@@ -22,7 +23,7 @@ std::set<size_t> get_answer(int test_number) {
     while (answer_file >> buf) {
         answers.insert(buf);
     }
-    
+
     return answers;
 }
 
@@ -33,7 +34,7 @@ std::set<size_t> test(int test_number) {
         throw OPEN_ERROR;
     }
 
-    std::cin.rdbuf(test_file.rdbuf()); 
+    std::cin.rdbuf(test_file.rdbuf());
 
     size_t triangles_number;
     std::cin >> triangles_number;
@@ -55,19 +56,20 @@ std::set<size_t> test(int test_number) {
                 y_max = y;
                 z_max = z;
             }
-            x_min = x<x_min?x:x_min;
-            y_min = y<y_min?y:y_min;
-            z_min = z<z_min?z:z_min;
-            x_max = x>x_max?x:x_max;
-            y_max = y>y_max?y:y_max;
-            z_max = z>z_max?z:z_max;
+            x_min = x < x_min ? x : x_min;
+            y_min = y < y_min ? y : y_min;
+            z_min = z < z_min ? z : z_min;
+            x_max = x > x_max ? x : x_max;
+            y_max = y > y_max ? y : y_max;
+            z_max = z > z_max ? z : z_max;
         }
-        triangles.emplace_back(Geometry::Triangle(triangle_points[0], triangle_points[1], triangle_points[2]), i);
+        triangles.emplace_back(
+        Geometry::Triangle(triangle_points[0], triangle_points[1], triangle_points[2]), i);
     }
 
-    Octree::Octree tree = Octree::Octree(triangles, Octree::Cube(Geometry::Point(x_min, y_min, z_min),
-                                                                 Geometry::Point(x_max, y_max, z_max)));                                                            
-    
+    Octree::Octree tree =
+    Octree::Octree(triangles, {x_min, y_min, z_min, x_max, y_max, z_max});
+
     std::set<size_t> res = tree.get_intersections();
 
     return res;
@@ -127,6 +129,14 @@ TEST(tests, test13) {
 
 TEST(tests, test14) {
     ASSERT_TRUE(test(14) == get_answer(14));
+}
+
+TEST(tests, test15) {
+    ASSERT_TRUE(test(15) == get_answer(15));
+}
+
+TEST(tests, test16) {
+    ASSERT_TRUE(test(16) == get_answer(16));
 }
 
 int main(int argc, char* argv[]) {

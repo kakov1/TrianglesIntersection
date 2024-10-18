@@ -16,9 +16,8 @@ namespace Geometry {
         public:
             Segment(){};
 
-            Segment(const Point& point1, const Point& point2) {
-                start_point      = point1;
-                end_point        = point2;
+            Segment(const Point& point1, const Point& point2)
+            : start_point{ point1 }, end_point{ point2 } {
                 direction_vector = { point2.get_x() - point1.get_x(),
                     point2.get_y() - point1.get_y(), point2.get_z() - point1.get_z() };
             }

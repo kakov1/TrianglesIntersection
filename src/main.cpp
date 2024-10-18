@@ -50,8 +50,8 @@ int main() {
         triangles.push_back(triangle);
     }
 
-    Octree::Octree tree = Octree::Octree(triangles,
-    Octree::Cube(Geometry::Point(x_min, y_min, z_min), Geometry::Point(x_max, y_max, z_max)));
+    Octree::Octree tree =
+    Octree::Octree(triangles, {x_min, y_min, z_min, x_max, y_max, z_max});
 
     std::set<size_t> res = tree.get_intersections();
 
