@@ -1,13 +1,13 @@
-#include "triangle.hpp"
 #include "octree.hpp"
-#include <list>
-#include <iostream>
+#include "triangle.hpp"
 #include <array>
+#include <iostream>
+#include <list>
 
 void is_cin_good() {
     if (!std::cin.good()) {
         throw std::runtime_error(
-        "Input error: something went wrong with input");
+            "Input error: something went wrong with input");
     }
 }
 
@@ -17,13 +17,13 @@ int main() {
     if (triangles_number < 0) {
         throw std::runtime_error("Input error: incorrect triangles_number");
     }
-    std::list<std::pair<Geometry::Triangle, size_t>> triangles;
+    std::list<std::pair<Geometry::Triangle<double>, size_t>> triangles;
 
     double x_min, y_min, z_min, x_max, y_max, z_max;
 
     for (int i = 0; i < triangles_number; i++) {
         double x, y, z;
-        std::array<Geometry::Point, 3> triangle_points;
+        std::array<Geometry::Point<double>, 3> triangle_points;
         for (int j = 0; j < 3; j++) {
             std::cin >> x >> y >> z;
             is_cin_good();
@@ -44,14 +44,18 @@ int main() {
             y_max = y > y_max ? y : y_max;
             z_max = z > z_max ? z : z_max;
         }
-        std::pair<Geometry::Triangle, size_t> triangle =
-        std::pair<Geometry::Triangle, size_t>(
-        Geometry::Triangle(triangle_points[0], triangle_points[1], triangle_points[2]), i);
+        std::pair<Geometry::Triangle<double>, size_t> triangle =
+            std::pair<Geometry::Triangle<double>, size_t>(
+                Geometry::Triangle<double>(triangle_points[0],
+                                           triangle_points[1],
+                                           triangle_points[2]),
+                i);
         triangles.push_back(triangle);
     }
 
-    Octree::Octree tree =
-    Octree::Octree(triangles, {x_min, y_min, z_min, x_max, y_max, z_max});
+    Octree::Octree<double> tree = Octree::Octree<double>(
+        triangles,
+        Octree::CubeParams{x_min, y_min, z_min, x_max, y_max, z_max});
 
     std::set<size_t> res = tree.get_intersections();
 

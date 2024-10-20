@@ -1,98 +1,120 @@
 #pragma once
 
-#include "triangle.hpp"
-#include "vector.hpp"
 #include "point.hpp"
 #include "tools.hpp"
+#include "triangle.hpp"
+#include "vector.hpp"
 #include <array>
-#include <list>
 #include <iterator>
+#include <list>
 #include <set>
 
 namespace Octree {
 
-    const double MIN_SIZE = 1;
+    const int MIN_SIZE = 1;
 
     using namespace Geometry;
-    using triangles_list = std::list<std::pair<Triangle, size_t>>;
 
+    template <typename FloatType>
     struct CubeParams {
-            double x_min;
-            double y_min;
-            double z_min;
-            double x_max;
-            double y_max;
-            double z_max;
+            FloatType x_min;
+            FloatType y_min;
+            FloatType z_min;
+            FloatType x_max;
+            FloatType y_max;
+            FloatType z_max;
     };
 
+    template <typename FloatType>
     class Cube {
         private:
-            Vector min;
-            Vector max;
+            Vector<FloatType> min;
+            Vector<FloatType> max;
 
         public:
-            Cube(){};
-            Cube(const Vector& point1, const Vector& point2)
-            : min(point1), max(point2){};
-            Cube(const CubeParams& cube_params)
-            : min(cube_params.x_min, cube_params.y_min, cube_params.z_min),
-              max(cube_params.x_max, cube_params.y_max, cube_params.z_max){};
+            Cube() = default;
+            Cube(const Vector<FloatType>& point1,
+                 const Vector<FloatType>& point2)
+                : min(point1), max(point2){};
+            Cube(const CubeParams<FloatType>& cube_params)
+                : min(cube_params.x_min, cube_params.y_min, cube_params.z_min),
+                  max(cube_params.x_max, cube_params.y_max,
+                      cube_params.z_max){};
 
-            Vector get_min() const {
-                return min;
-            }
+            Vector<FloatType> get_min() const { return min; }
 
-            Vector get_max() const {
-                return max;
-            }
+            Vector<FloatType> get_max() const { return max; }
 
             void partition(std::array<Cube, 8>& cubes) const {
-                Vector center = (min + max) / 2;
+                Vector<FloatType> center = (min + max) / 2;
 
                 cubes[0] = Cube(min, center);
-                cubes[1] = Cube(Vector(center.get_x(), min.get_y(), min.get_z()),
-                Vector(max.get_x(), center.get_y(), center.get_z()));
-                cubes[2] = Cube(Vector(center.get_x(), min.get_y(), center.get_z()),
-                Vector(max.get_x(), center.get_y(), max.get_z()));
-                cubes[3] = Cube(Vector(min.get_x(), min.get_y(), center.get_z()),
-                Vector(center.get_x(), center.get_y(), max.get_z()));
-                cubes[4] = Cube(Vector(min.get_x(), center.get_y(), min.get_z()),
-                Vector(center.get_x(), max.get_y(), center.get_z()));
-                cubes[5] = Cube(Vector(center.get_x(), center.get_y(), min.get_z()),
-                Vector(max.get_x(), max.get_y(), center.get_z()));
+                cubes[1] = Cube(Vector<FloatType>(center.get_x(), min.get_y(),
+                                                  min.get_z()),
+                                Vector<FloatType>(max.get_x(), center.get_y(),
+                                                  center.get_z()));
+                cubes[2] = Cube(Vector<FloatType>(center.get_x(), min.get_y(),
+                                                  center.get_z()),
+                                Vector<FloatType>(max.get_x(), center.get_y(),
+                                                  max.get_z()));
+                cubes[3] =
+                    Cube(Vector<FloatType>(min.get_x(), min.get_y(),
+                                           center.get_z()),
+                         Vector<FloatType>(center.get_x(), center.get_y(),
+                                           max.get_z()));
+                cubes[4] = Cube(Vector<FloatType>(min.get_x(), center.get_y(),
+                                                  min.get_z()),
+                                Vector<FloatType>(center.get_x(), max.get_y(),
+                                                  center.get_z()));
+                cubes[5] = Cube(Vector<FloatType>(center.get_x(),
+                                                  center.get_y(), min.get_z()),
+                                Vector<FloatType>(max.get_x(), max.get_y(),
+                                                  center.get_z()));
                 cubes[6] = Cube(center, max);
-                cubes[7] = Cube(Vector(min.get_x(), center.get_y(), center.get_z()),
-                Vector(center.get_x(), max.get_y(), max.get_z()));
+                cubes[7] = Cube(Vector<FloatType>(min.get_x(), center.get_y(),
+                                                  center.get_z()),
+                                Vector<FloatType>(center.get_x(), max.get_y(),
+                                                  max.get_z()));
             }
 
-            bool is_point_in_cube(const Point& point) const {
-                return point.get_x() > min.get_x() && point.get_x() < max.get_x() &&
-                point.get_y() > min.get_y() && point.get_y() < max.get_y() &&
-                point.get_z() > min.get_z() && point.get_z() < max.get_z();
+            bool is_point_in_cube(const Point<FloatType>& point) const {
+                return point.get_x() > min.get_x() &&
+                       point.get_x() < max.get_x() &&
+                       point.get_y() > min.get_y() &&
+                       point.get_y() < max.get_y() &&
+                       point.get_z() > min.get_z() &&
+                       point.get_z() < max.get_z();
             }
 
-            bool is_triangle_in_cube(const Triangle& triangle) const {
+            bool
+            is_triangle_in_cube(const Triangle<FloatType>& triangle) const {
                 return is_point_in_cube(triangle.get_a()) &&
-                is_point_in_cube(triangle.get_b()) &&
-                is_point_in_cube(triangle.get_c());
+                       is_point_in_cube(triangle.get_b()) &&
+                       is_point_in_cube(triangle.get_c());
             }
 
-            bool is_part_of_triangle_in_cube(const Triangle& triangle) const {
+            bool is_part_of_triangle_in_cube(
+                const Triangle<FloatType>& triangle) const {
                 return is_point_in_cube(triangle.get_a()) ||
-                is_point_in_cube(triangle.get_b()) ||
-                is_point_in_cube(triangle.get_c());
+                       is_point_in_cube(triangle.get_b()) ||
+                       is_point_in_cube(triangle.get_c());
             }
     };
 
+    template <typename FloatType>
     class Node {
         public:
-            Cube region_;
+            using triangles_list =
+                std::list<std::pair<Triangle<FloatType>, size_t>>;
+
+            Cube<FloatType> region_;
             triangles_list triangles_;
             std::array<Node*, 8> children_;
             bool has_child = false;
 
-            Node(const triangles_list& objects, const Cube& region) {
-                region_    = region;
+            Node(const triangles_list& objects,
+                 const Cube<FloatType>& region) {
+                region_ = region;
                 triangles_ = objects;
             }
 
@@ -104,7 +126,8 @@ namespace Octree {
                 }
             }
 
-            Node* create_node(const triangles_list& triangles, const Cube& region) {
+            Node* create_node(const triangles_list& triangles,
+                              const Cube<FloatType>& region) {
                 Node* new_node_ptr = new Node(triangles, region);
 
                 return new_node_ptr;
@@ -114,22 +137,26 @@ namespace Octree {
                 if (triangles_.size() <= 3)
                     return;
 
-                Vector cube_params = region_.get_max() - region_.get_min();
+                Vector<FloatType> cube_params =
+                    region_.get_max() - region_.get_min();
 
                 if (cube_params.get_x() < MIN_SIZE &&
-                cube_params.get_y() < MIN_SIZE && cube_params.get_z() < MIN_SIZE) {
+                    cube_params.get_y() < MIN_SIZE &&
+                    cube_params.get_z() < MIN_SIZE) {
                     return;
                 }
 
-                std::array<Cube, 8> cubes;
+                std::array<Cube<FloatType>, 8> cubes;
                 region_.partition(cubes);
                 std::array<triangles_list, 8> triangles_partition;
-                std::list<triangles_list::iterator> triangles_deletion;
+                std::list<typename triangles_list::iterator>
+                    triangles_deletion;
 
                 for (auto triangle_it = triangles_.begin();
                      triangle_it != triangles_.end(); triangle_it++) {
                     for (int part_num = 0; part_num < 8; part_num++) {
-                        if (!cubes[part_num].is_triangle_in_cube(triangle_it->first))
+                        if (!cubes[part_num].is_triangle_in_cube(
+                                triangle_it->first))
                             continue;
                         triangles_partition[part_num].push_back(*triangle_it);
                         triangles_deletion.push_back(triangle_it);
@@ -144,8 +171,8 @@ namespace Octree {
                 for (int child_num = 0; child_num < 8; child_num++) {
                     if (!triangles_partition[child_num].empty()) {
                         has_child = true;
-                        children_[child_num] =
-                        create_node(triangles_partition[child_num], cubes[child_num]);
+                        children_[child_num] = create_node(
+                            triangles_partition[child_num], cubes[child_num]);
                         children_[child_num]->build_tree();
                     }
                     else {
@@ -162,7 +189,7 @@ namespace Octree {
                 for (auto triangle1 : triangles_) {
                     for (auto triangle2 : triangles_copy) {
                         if (triangle1.second == triangle2.second ||
-                        !triangle1.first.is_intersect(triangle2.first))
+                            !triangle1.first.is_intersect(triangle2.first))
                             continue;
                         result.insert(triangle1.second);
                         result.insert(triangle2.second);
@@ -174,16 +201,16 @@ namespace Octree {
             }
 
             void get_intersections_with_child(std::set<size_t>& result,
-            const triangles_list& triangles,
-            const Node* child) const {
+                                              const triangles_list& triangles,
+                                              const Node* child) const {
                 if (child == nullptr || child->triangles_.empty())
                     return;
 
                 for (auto triangle1 : triangles) {
                     for (auto triangle2 : child->triangles_) {
                         if (!child->region_.is_part_of_triangle_in_cube(
-                            triangle1.first) ||
-                        !triangle1.first.is_intersect(triangle2.first))
+                                triangle1.first) ||
+                            !triangle1.first.is_intersect(triangle2.first))
                             continue;
                         result.insert(triangle1.second);
                         result.insert(triangle2.second);
@@ -191,8 +218,9 @@ namespace Octree {
                 }
             }
 
-            void get_intersections_with_children(std::set<size_t>& result,
-            const triangles_list& triangles) const {
+            void get_intersections_with_children(
+                std::set<size_t>& result,
+                const triangles_list& triangles) const {
                 if (!has_child)
                     return;
                 for (Node* child : children_) {
@@ -229,22 +257,25 @@ namespace Octree {
             }
     };
 
+    template <typename FloatType>
     class Octree {
         private:
-            Node* root;
+            Node<FloatType>* root;
 
         public:
-            Octree(const triangles_list& objects, const CubeParams& cube_params) {
+            using triangles_list =
+                std::list<std::pair<Triangle<FloatType>, size_t>>;
+
+            Octree(const triangles_list& objects,
+                   const CubeParams<FloatType>& cube_params) {
                 root = root->create_node(objects, Cube(cube_params));
                 root->build_tree();
             }
 
-            ~Octree() {
-                delete root;
-            }
+            ~Octree() { delete root; }
 
             std::set<size_t> get_intersections() const {
                 return root->get_intersections();
             }
     };
-}
+} // namespace Octree

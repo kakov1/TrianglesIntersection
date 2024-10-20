@@ -2,10 +2,11 @@
 
 #include "point.hpp"
 #include "tools.hpp"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 namespace Geometry {
+    template <typename FloatType>
     class Vector {
         private:
             double x = NAN;
@@ -13,7 +14,7 @@ namespace Geometry {
             double z = NAN;
 
         public:
-            Vector(){};
+            Vector() = default;
 
             Vector(double coord_x, double coord_y, double coord_z) {
                 x = coord_x;
@@ -21,40 +22,35 @@ namespace Geometry {
                 z = coord_z;
             }
 
-            Vector(const Point& point1, const Point& point2) {
+            Vector(const Point<FloatType>& point1,
+                   const Point<FloatType>& point2) {
                 x = point2.get_x() - point1.get_x();
                 y = point2.get_y() - point1.get_y();
                 z = point2.get_z() - point1.get_z();
             }
 
-            Vector(const Point& point) {
+            Vector(const Point<FloatType>& point) {
                 x = point.get_x();
                 y = point.get_y();
                 z = point.get_z();
             }
 
-            double get_x() const {
-                return x;
-            }
+            double get_x() const { return x; }
 
-            double get_y() const {
-                return y;
-            }
+            double get_y() const { return y; }
 
-            double get_z() const {
-                return z;
-            }
+            double get_z() const { return z; }
 
             Vector operator+(const Vector& vector) const {
-                return { x + vector.x, y + vector.y, z + vector.z };
+                return {x + vector.x, y + vector.y, z + vector.z};
             }
 
             Vector operator-(const Vector& vector) const {
-                return { x - vector.x, y - vector.y, z - vector.z };
+                return {x - vector.x, y - vector.y, z - vector.z};
             }
 
             Vector operator*(double number) const {
-                return { number * x, number * y, number * z };
+                return {number * x, number * y, number * z};
             }
 
             Vector operator/(double number) const {
@@ -62,18 +58,17 @@ namespace Geometry {
             }
 
             bool is_equal(const Vector& vector) const {
-                return (is_equal_doubles(x, vector.x) &&
-                is_equal_doubles(y, vector.y) && is_equal_doubles(z, vector.z));
+                return (is_equal_floats(x, vector.x) &&
+                        is_equal_floats(y, vector.y) &&
+                        is_equal_floats(z, vector.z));
             }
 
-            Vector opposite() const {
-                return { -x, -y, -z };
-            }
+            Vector opposite() const { return {-x, -y, -z}; }
 
             Vector vector_product(const Vector& vector) const {
-                return { det_two(y, z, vector.y, vector.z),
-                    -det_two(x, z, vector.x, vector.z),
-                    det_two(x, y, vector.x, vector.y) };
+                return {det_two(y, z, vector.y, vector.z),
+                        -det_two(x, z, vector.x, vector.z),
+                        det_two(x, y, vector.x, vector.y)};
             }
 
             double length() const {
@@ -84,12 +79,14 @@ namespace Geometry {
                 if (!is_collinear(vector)) {
                     return false;
                 }
-                return is_equal_doubles(length() * vector.length(), scalar_product(vector));
+                return is_equal_floats(length() * vector.length(),
+                                       scalar_product(vector));
             }
 
             double triple_product(const Vector& a, const Vector& b) const {
                 return x * det_two(a.y, a.z, b.y, b.z) -
-                y * det_two(a.x, a.z, b.x, b.z) + z * det_two(a.x, a.y, b.x, b.y);
+                       y * det_two(a.x, a.z, b.x, b.z) +
+                       z * det_two(a.x, a.y, b.x, b.y);
             }
 
             double vector_module() const {
@@ -101,7 +98,7 @@ namespace Geometry {
             }
 
             bool is_skew(const Vector& vector) const {
-                return triple_product(vector, { x, y, z }) == 0;
+                return triple_product(vector, {x, y, z}) == 0;
             }
 
             double scalar_product(const Vector& vector) const {
@@ -109,15 +106,20 @@ namespace Geometry {
             }
 
             void print() const {
-                std::cout << "(" << x << ", " << y << ", " << z << ")" << std::endl;
+                std::cout << "(" << x << ", " << y << ", " << z << ")"
+                          << std::endl;
             }
     };
 
-    Vector operator*(double number, const Vector& vector) {
+    template <typename FloatType>
+    Vector<FloatType> operator*(double number,
+                                const Vector<FloatType>& vector) {
         return vector * number;
     }
 
-    Vector operator/(double number, const Vector& vector) {
+    template <typename FloatType>
+    Vector<FloatType> operator/(double number,
+                                const Vector<FloatType>& vector) {
         return vector / number;
     }
-}
+} // namespace Geometry
