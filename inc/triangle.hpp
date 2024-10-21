@@ -201,11 +201,11 @@ namespace Geometry {
                 plane = Plane(a, b, c);
             }
 
-            Point<FloatType> get_a() const { return a; }
+            const Point<FloatType>& get_a() const { return a; }
 
-            Point<FloatType> get_b() const { return b; }
+            const Point<FloatType>& get_b() const { return b; }
 
-            Point<FloatType> get_c() const { return c; }
+            const Point<FloatType>& get_c() const { return c; }
 
             bool is_degenerate() const { return is_point() || is_segment(); }
 
@@ -240,9 +240,9 @@ namespace Geometry {
                 FloatType u = (dot11 * dot02 - dot01 * dot12) * denom;
                 FloatType v = (dot00 * dot12 - dot01 * dot02) * denom;
 
-                return (u > 0 || is_equal_floats(u, 0.0)) &&
-                       (v > 0 || is_equal_floats(v, 0.0)) &&
-                       (u + v < 1 || is_equal_floats(u + v, 1.0));
+                return (u > 0 || is_zero(u)) &&
+                       (v > 0 || is_zero(v)) &&
+                       (u + v < 1 || is_zero(u + v - 1));
             }
 
             bool is_intersect(const Triangle& triangle) const {

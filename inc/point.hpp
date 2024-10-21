@@ -19,11 +19,11 @@ namespace Geometry {
                 z = coord_z;
             }
 
-            FloatType get_x() const { return x; }
+            const FloatType& get_x() const { return x; }
 
-            FloatType get_y() const { return y; }
+            const FloatType& get_y() const { return y; }
 
-            FloatType get_z() const { return z; }
+            const FloatType& get_z() const { return z; }
 
             bool is_equal(const Point& point) const {
                 return (is_equal_floats(x, point.x) &&

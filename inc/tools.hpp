@@ -11,32 +11,71 @@ namespace Geometry {
     class Accuracy {
         public:
             static FloatType get_epsilon() { return 1e-8; }
+
+            static std::pair<FloatType, FloatType> nan_solution() {
+                return {static_cast<FloatType>(NAN),
+                        static_cast<FloatType>(NAN)};
+            }
+
+            static std::pair<FloatType, FloatType> inf_solution() {
+                return {static_cast<FloatType>(INFINITY),
+                        static_cast<FloatType>(INFINITY)};
+            }
     };
 
     template <>
     class Accuracy<long double> {
         public:
             static long double get_epsilon() { return 1e-10; }
+
+            static std::pair<long double, long double> nan_solution() {
+                return {static_cast<long double>(NAN),
+                        static_cast<long double>(NAN)};
+            }
+
+            static std::pair<long double, long double> inf_solution() {
+                return {static_cast<long double>(INFINITY),
+                        static_cast<long double>(INFINITY)};
+            }
     };
 
     template <>
     class Accuracy<double> {
         public:
             static double get_epsilon() { return 1e-8; }
+
+            static std::pair<double, double> nan_solution() {
+                return {NAN, NAN};
+            }
+
+            static std::pair<double, double> inf_solution() {
+                return {INFINITY, INFINITY};
+            }
     };
 
     template <>
     class Accuracy<float> {
         public:
             static float get_epsilon() { return 1e-5; }
-    };
 
-    const std::pair<double, double> NAN_SOLUTION = {NAN, NAN};
-    const std::pair<double, double> INFINITY_SOLUTION = {INFINITY, INFINITY};
+            static std::pair<float, float> nan_solution() {
+                return {static_cast<float>(NAN), static_cast<float>(NAN)};
+            }
+
+            static std::pair<float, float> inf_solution() {
+                return {static_cast<float>(INFINITY),
+                        static_cast<float>(INFINITY)};
+            }
+    };
 
     template <typename FloatType>
     bool is_equal_floats(const FloatType a, const FloatType b) {
         return (std::fabs(a - b) < Accuracy<FloatType>::get_epsilon());
+    }
+
+    template <typename FloatType>
+    bool is_zero(const FloatType a) {
+        return (std::fabs(a) < Accuracy<FloatType>::get_epsilon());
     }
 
     template <typename FloatType>
@@ -64,12 +103,12 @@ namespace Geometry {
         FloatType x_det = det_two(row1[2], row1[1], row2[2], row2[1]);
         FloatType y_det = det_two(row1[0], row1[2], row2[0], row2[2]);
 
-        if (is_equal_floats(main_det, 0.0)) {
-            if (is_equal_floats(x_det, 0.0) && is_equal_floats(y_det, 0.0)) {
-                return {INFINITY, INFINITY};
+        if (is_zero(main_det)) {
+            if (is_zero(x_det) && is_zero(y_det)) {
+                return Accuracy<FloatType>::inf_solution();
             }
             else {
-                return {NAN, NAN};
+                return Accuracy<FloatType>::nan_solution();
             }
         }
         else {
@@ -108,7 +147,7 @@ namespace Geometry {
 
         if (is_inf_solution(solution12) && is_inf_solution(solution23) &&
             is_inf_solution(solution13))
-            return INFINITY_SOLUTION;
+            return Accuracy<FloatType>::inf_solution();
 
         if (is_inf_solution(solution12) && is_inf_solution(solution23))
             return solution13;
@@ -133,7 +172,7 @@ namespace Geometry {
             return solution12;
         }
         else {
-            return NAN_SOLUTION;
+            return Accuracy<FloatType>::nan_solution();
         }
     }
 } // namespace Geometry

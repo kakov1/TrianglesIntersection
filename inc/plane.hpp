@@ -48,9 +48,9 @@ namespace Geometry {
                 normal = Vector<FloatType>(normal_x, normal_y, normal_z);
             }
 
-            Vector<FloatType> get_normal() const { return normal; }
+            const Vector<FloatType>& get_normal() const { return normal; }
 
-            FloatType get_d() const { return d; }
+            const FloatType& get_d() const { return d; }
 
             Vector<FloatType>
             find_perp_in_plane(const Vector<FloatType>& vector) const {
@@ -72,10 +72,9 @@ namespace Geometry {
             }
 
             bool is_point_belong(const Point<FloatType>& point) const {
-                return is_equal_floats(normal.get_x() * point.get_x() +
-                                           normal.get_y() * point.get_y() +
-                                           normal.get_z() * point.get_z() + d,
-                                       0.0);
+                return is_zero(normal.get_x() * point.get_x() +
+                               normal.get_y() * point.get_y() +
+                               normal.get_z() * point.get_z() + d);
             }
 
             bool is_collinear(const Plane& plane) const {
@@ -103,14 +102,14 @@ namespace Geometry {
                 FloatType result = normal.get_x() * point.get_x() +
                                    normal.get_y() * point.get_y() +
                                    normal.get_z() * point.get_z() + d;
-                return (result > 0 && !is_equal_floats(result, 0.0));
+                return (result > 0 && !is_zero(result));
             }
 
             bool is_point_under_plane(const Point<FloatType>& point) const {
                 FloatType result = normal.get_x() * point.get_x() +
                                    normal.get_y() * point.get_y() +
                                    normal.get_z() * point.get_z() + d;
-                return (result < 0 && !is_equal_floats(result, 0.0));
+                return (result < 0 && !is_zero(result));
             }
 
             Line<FloatType> intersection(const Plane& plane) const {

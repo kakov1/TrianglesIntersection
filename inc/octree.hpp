@@ -41,9 +41,9 @@ namespace Octree {
                   max(cube_params.x_max, cube_params.y_max,
                       cube_params.z_max){};
 
-            Vector<FloatType> get_min() const { return min; }
+            const Vector<FloatType>& get_min() const { return min; }
 
-            Vector<FloatType> get_max() const { return max; }
+            const Vector<FloatType>& get_max() const { return max; }
 
             void partition(std::array<Cube, 8>& cubes) const {
                 Vector<FloatType> center = (min + max) / 2;

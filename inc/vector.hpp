@@ -9,14 +9,14 @@ namespace Geometry {
     template <typename FloatType>
     class Vector {
         private:
-            double x = NAN;
-            double y = NAN;
-            double z = NAN;
+            FloatType x = NAN;
+            FloatType y = NAN;
+            FloatType z = NAN;
 
         public:
             Vector() = default;
 
-            Vector(double coord_x, double coord_y, double coord_z) {
+            Vector(FloatType coord_x, FloatType coord_y, FloatType coord_z) {
                 x = coord_x;
                 y = coord_y;
                 z = coord_z;
@@ -35,11 +35,11 @@ namespace Geometry {
                 z = point.get_z();
             }
 
-            double get_x() const { return x; }
+            const FloatType& get_x() const { return x; }
 
-            double get_y() const { return y; }
+            const FloatType& get_y() const { return y; }
 
-            double get_z() const { return z; }
+            const FloatType& get_z() const { return z; }
 
             Vector operator+(const Vector& vector) const {
                 return {x + vector.x, y + vector.y, z + vector.z};
@@ -49,11 +49,11 @@ namespace Geometry {
                 return {x - vector.x, y - vector.y, z - vector.z};
             }
 
-            Vector operator*(double number) const {
+            Vector operator*(FloatType number) const {
                 return {number * x, number * y, number * z};
             }
 
-            Vector operator/(double number) const {
+            Vector operator/(FloatType number) const {
                 return operator*(1 / number);
             }
 
@@ -112,13 +112,13 @@ namespace Geometry {
     };
 
     template <typename FloatType>
-    Vector<FloatType> operator*(double number,
+    Vector<FloatType> operator*(FloatType number,
                                 const Vector<FloatType>& vector) {
         return vector * number;
     }
 
     template <typename FloatType>
-    Vector<FloatType> operator/(double number,
+    Vector<FloatType> operator/(FloatType number,
                                 const Vector<FloatType>& vector) {
         return vector / number;
     }

@@ -27,9 +27,11 @@ namespace Geometry {
                 direction_vector = vector;
             }
 
-            Point<FloatType> get_start_point() const { return start_point; }
+            const Point<FloatType>& get_start_point() const {
+                return start_point;
+            }
 
-            Vector<FloatType> get_direction_vector() const {
+            const Vector<FloatType>& get_direction_vector() const {
                 return direction_vector;
             }
 
@@ -89,9 +91,10 @@ namespace Geometry {
                         std::vector<FloatType>{point.get_y(),
                                                -direction_vector.get_y(),
                                                start_point.get_y()},
-                        std::vector<FloatType>{
-                            point.get_z(), -direction_vector.get_z(),
-                            start_point.get_z()}) != NAN_SOLUTION) {
+                        std::vector<FloatType>{point.get_z(),
+                                               -direction_vector.get_z(),
+                                               start_point.get_z()}) !=
+                    Accuracy<FloatType>::nan_solution()) {
                     return true;
                 }
                 return false;

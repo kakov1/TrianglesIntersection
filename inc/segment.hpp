@@ -31,11 +31,13 @@ namespace Geometry {
                 direction_vector = {0, 0, 0};
             }
 
-            Point<FloatType> get_start_point() const { return start_point; }
+            const Point<FloatType>& get_start_point() const {
+                return start_point;
+            }
 
-            Point<FloatType> get_end_point() const { return end_point; }
+            const Point<FloatType>& get_end_point() const { return end_point; }
 
-            Vector<FloatType> get_direction_vector() const {
+            const Vector<FloatType>& get_direction_vector() const {
                 return direction_vector;
             }
 
