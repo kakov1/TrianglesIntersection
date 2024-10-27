@@ -42,8 +42,13 @@ namespace Geometry {
                                              point2.get_y() - point1.get_y(),
                                              point3.get_x() - point1.get_x(),
                                              point3.get_y() - point1.get_y());
+                //std::cout << point1.get_x() << " " << point1.get_y() << " "
+                //<< point1.get_z() << " " << normal_x << " " << normal_y << " " << normal_z << std::endl; 
+                
                 d = -(point1.get_x() * normal_x) -
                     (point1.get_y() * normal_y) - (point1.get_z() * normal_z);
+
+                //std::cout << d << std::endl;
 
                 normal = Vector<FloatType>(normal_x, normal_y, normal_z);
             }
@@ -84,7 +89,7 @@ namespace Geometry {
             Plane normalize() const {
                 FloatType coefficient = d;
 
-                if (coefficient < 0) {
+                if (is_less(coefficient, 0)) {
                     coefficient *= (-1);
                 }
 
@@ -102,20 +107,20 @@ namespace Geometry {
                 FloatType result = normal.get_x() * point.get_x() +
                                    normal.get_y() * point.get_y() +
                                    normal.get_z() * point.get_z() + d;
-                return (result > 0 && !is_zero(result));
+                return (is_bigger_zero(result) && !is_zero(result));
             }
 
             bool is_point_under_plane(const Point<FloatType>& point) const {
                 FloatType result = normal.get_x() * point.get_x() +
                                    normal.get_y() * point.get_y() +
                                    normal.get_z() * point.get_z() + d;
-                return (result < 0 && !is_zero(result));
+                return (is_less_zero(result) && !is_zero(result));
             }
 
             Line<FloatType> intersection(const Plane& plane) const {
                 Vector<FloatType> n = normal.vector_product(plane.normal);
 
-                if (n.vector_module() == 0) {
+                if (is_zero(n.vector_module())) {
                     return Line<FloatType>();
                 }
 
@@ -129,12 +134,22 @@ namespace Geometry {
 
                 a = (d * normal2_length_sqr -
                      plane.d * normals_scalar_product) /
-                    (pow(normals_scalar_product, 2) -
+                    (normals_scalar_product * normals_scalar_product -
                      normal1_length_sqr * normal2_length_sqr);
                 b = (plane.d * normal1_length_sqr -
                      d * normals_scalar_product) /
-                    (pow(normals_scalar_product, 2) -
+                    (normals_scalar_product * normals_scalar_product -
                      normal1_length_sqr * normal2_length_sqr);
+
+                //std::cout << plane.d << " " << normal1_length_sqr << " " << d << 
+                //" " << normals_scalar_product<<std::endl; 
+                    
+                //std::cout << (d * normal2_length_sqr -
+                //     plane.d * normals_scalar_product) << " "<< (normals_scalar_product * normals_scalar_product -
+                //     normal1_length_sqr * normal2_length_sqr)<< std::endl;
+                //std::cout << (plane.d * normal1_length_sqr -
+                //     d * normals_scalar_product) << " " << (normals_scalar_product * normals_scalar_product -
+                //     normal1_length_sqr * normal2_length_sqr) << std::endl;
 
                 Vector<FloatType> start_vector = a * normal + b * plane.normal;
                 Line<FloatType> result =

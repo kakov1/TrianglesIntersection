@@ -11,8 +11,6 @@
 
 namespace Octree {
 
-    const int MIN_SIZE = 1;
-
     using namespace Geometry;
 
     template <typename FloatType>
@@ -78,12 +76,12 @@ namespace Octree {
             }
 
             bool is_point_in_cube(const Point<FloatType>& point) const {
-                return point.get_x() > min.get_x() &&
-                       point.get_x() < max.get_x() &&
-                       point.get_y() > min.get_y() &&
-                       point.get_y() < max.get_y() &&
-                       point.get_z() > min.get_z() &&
-                       point.get_z() < max.get_z();
+                return is_bigger(point.get_x(), min.get_x()) &&
+                       is_less(point.get_x(), max.get_x()) &&
+                       is_bigger(point.get_y(), min.get_y()) &&
+                       is_less(point.get_y(), max.get_y()) &&
+                       is_bigger(point.get_z(), min.get_z()) &&
+                       is_less(point.get_z(), max.get_z());
             }
 
             bool
@@ -106,6 +104,8 @@ namespace Octree {
         public:
             using triangles_list =
                 std::list<std::pair<Triangle<FloatType>, size_t>>;
+
+            const FloatType MIN_SIZE = 1;
 
             Cube<FloatType> region_;
             triangles_list triangles_;
@@ -140,9 +140,9 @@ namespace Octree {
                 Vector<FloatType> cube_params =
                     region_.get_max() - region_.get_min();
 
-                if (cube_params.get_x() < MIN_SIZE &&
-                    cube_params.get_y() < MIN_SIZE &&
-                    cube_params.get_z() < MIN_SIZE) {
+                if (is_less(cube_params.get_x(), MIN_SIZE) &&
+                    is_less(cube_params.get_y(), MIN_SIZE) &&
+                    is_less(cube_params.get_z(), MIN_SIZE)) {
                     return;
                 }
 

@@ -50,10 +50,10 @@ namespace Geometry {
                         Vector<FloatType>({0, 0, 0}, get_vertice(i))
                             .scalar_product(
                                 Vector<FloatType>({0, 0, 0}, point));
-                    if (value < min) {
+                    if (is_less(value, min)) {
                         min = value;
                     }
-                    else if (value > max) {
+                    else if (is_bigger(value, max)) {
                         max = value;
                     }
                 }
@@ -77,7 +77,7 @@ namespace Geometry {
                         Point<FloatType>(perp_side.get_x(), perp_side.get_y(),
                                          perp_side.get_z()),
                         min2, max2);
-                    if (max2 < min1 || max1 < min2) {
+                    if (is_less(max2, min1) || is_less(max1, min2)) {
                         return false;
                     }
                 }
@@ -96,7 +96,7 @@ namespace Geometry {
                         Point<FloatType>(perp_side.get_x(), perp_side.get_y(),
                                          perp_side.get_z()),
                         min2, max2);
-                    if (max2 < min1 || max1 < min2) {
+                    if (is_less(max2, min1) || is_less(max1, min2)) {
                         return false;
                     }
                 }
@@ -117,11 +117,13 @@ namespace Geometry {
                 }
 
                 Point<FloatType> intersection_point_ab =
-                    line.lines_intersection({a, b});
+                    line.lines_intersection(Line<FloatType>{a, b});
                 Point<FloatType> intersection_point_bc =
-                    line.lines_intersection({b, c});
+                    line.lines_intersection(Line<FloatType>{b, c});
                 Point<FloatType> intersection_point_ac =
-                    line.lines_intersection({a, c});
+                    line.lines_intersection(Line<FloatType>{a, c});
+
+                //std::cout << "same_plane" <<std::endl;
 
                 if (!Segment<FloatType>(a, b).is_point_belong(
                         intersection_point_ab)) {
@@ -138,15 +140,15 @@ namespace Geometry {
 
                 if (!intersection_point_ab.is_equal(Point<FloatType>()) &&
                     !intersection_point_bc.is_equal(Point<FloatType>())) {
-                    return {intersection_point_ab, intersection_point_bc};
+                    return Segment<FloatType>{intersection_point_ab, intersection_point_bc};
                 }
                 else if (!intersection_point_bc.is_equal(Point<FloatType>()) &&
                          !intersection_point_ac.is_equal(Point<FloatType>())) {
-                    return {intersection_point_bc, intersection_point_ac};
+                    return Segment<FloatType>{intersection_point_bc, intersection_point_ac};
                 }
                 else if (!intersection_point_ab.is_equal(Point<FloatType>()) &&
                          !intersection_point_ac.is_equal(Point<FloatType>())) {
-                    return {intersection_point_ab, intersection_point_ac};
+                    return Segment<FloatType>{intersection_point_ab, intersection_point_ac};
                 }
                 return Segment<FloatType>();
             }
@@ -240,9 +242,9 @@ namespace Geometry {
                 FloatType u = (dot11 * dot02 - dot01 * dot12) * denom;
                 FloatType v = (dot00 * dot12 - dot01 * dot02) * denom;
 
-                return (u > 0 || is_zero(u)) &&
-                       (v > 0 || is_zero(v)) &&
-                       (u + v < 1 || is_zero(u + v - 1));
+                return (is_bigger_zero(u) || is_zero(u)) &&
+                       (is_bigger_zero(v) || is_zero(v)) &&
+                       (is_less(u + v, static_cast<FloatType>(1)) || is_zero(u + v - 1));
             }
 
             bool is_intersect(const Triangle& triangle) const {
@@ -274,6 +276,8 @@ namespace Geometry {
                     else {
                         Line<FloatType> intersection_line =
                             plane.intersection(triangle.plane);
+                        
+                        //intersection_line.print();
 
                         Segment<FloatType> segment1 =
                             intersection_line_in_same_plane(intersection_line);
@@ -281,9 +285,15 @@ namespace Geometry {
                             triangle.intersection_line_in_same_plane(
                                 intersection_line);
 
+                        //if (!segment1.is_nan() && !segment2.is_nan()) {
+                        //    std::cout << "-----";
+                        //    segment1.print();
+                        //    segment2.print();
+                        //    std::cout<<"------";
+                        //}
                         Segment<FloatType> intersection =
                             segment1.collinear_segments_intersection(segment2);
-
+                       
                         if (!intersection.is_equal(Segment<FloatType>())) {
                             return true;
                         }
@@ -300,8 +310,8 @@ namespace Geometry {
                     segment.get_direction_vector().vector_product(e2);
                 FloatType tmp = p.scalar_product(e1);
 
-                if (tmp > -Accuracy<FloatType>::get_epsilon() &&
-                    tmp < Accuracy<FloatType>::get_epsilon()) {
+                if (is_bigger(tmp, -Accuracy<FloatType>::get_epsilon()) &&
+                    is_less(tmp, Accuracy<FloatType>::get_epsilon())) {
                     return false;
                 }
 
@@ -310,14 +320,14 @@ namespace Geometry {
                     Vector<FloatType>(a, segment.get_start_point());
 
                 FloatType u = tmp * s.scalar_product(p);
-                if (u < 0 || u > 1) {
+                if (is_less_zero(u) || is_bigger(u, static_cast<FloatType>(1))) {
                     return false;
                 }
 
                 Vector<FloatType> q = s.vector_product(e1);
                 FloatType v = tmp * q.scalar_product(p);
 
-                if (v < 0 || v > 1) {
+                if (is_less_zero(v) || is_bigger(v, static_cast<FloatType>(1))) {
                     return false;
                 }
 

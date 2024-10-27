@@ -37,6 +37,7 @@ namespace Geometry {
 
             Point<FloatType>
             lines_intersection(const Line<FloatType>& line) const {
+                //std::cout <<"lines: "<<std::endl;
                 std::pair<FloatType, FloatType> params_of_intersection =
                     solve_system_3eq_2var(
                         std::vector<FloatType>{direction_vector.get_x(),
@@ -51,6 +52,10 @@ namespace Geometry {
                                                -line.direction_vector.get_z(),
                                                line.start_point.get_z() -
                                                    start_point.get_z()});
+                
+                //std::cout << "params: "<<std::endl;
+                //std::cout << params_of_intersection.first << std::endl;
+                //std::cout << params_of_intersection.second << std::endl;
 
                 if (is_nan_solution(params_of_intersection)) {
                     return Point<FloatType>();
@@ -61,7 +66,7 @@ namespace Geometry {
                 }
 
                 else {
-                    return {
+                    return Point<FloatType>{
                         start_point.get_x() + params_of_intersection.first *
                                                   direction_vector.get_x(),
                         start_point.get_y() + params_of_intersection.first *
@@ -84,6 +89,8 @@ namespace Geometry {
             }
 
             bool is_point_belong(const Point<FloatType>& point) const {
+                //std::cout<<"point:"<<std::endl;
+                //std::cout << point.get_x() << " " << direction_vector.get_x() << " " << start_point.get_x()<<std::endl;
                 if (solve_system_3eq_2var(
                         std::vector<FloatType>{point.get_x(),
                                                -direction_vector.get_x(),

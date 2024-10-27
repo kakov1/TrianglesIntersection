@@ -44,11 +44,11 @@ namespace Geometry {
             bool is_point_belong(const Point<FloatType>& point) const {
                 return (
                     Line(start_point, end_point).is_point_belong(point) &&
-                    is_double_in_segment(point.get_x(), start_point.get_x(),
+                    is_float_in_segment(point.get_x(), start_point.get_x(),
                                          end_point.get_x()) &&
-                    is_double_in_segment(point.get_y(), start_point.get_y(),
+                    is_float_in_segment(point.get_y(), start_point.get_y(),
                                          end_point.get_y()) &&
-                    is_double_in_segment(point.get_z(), start_point.get_z(),
+                    is_float_in_segment(point.get_z(), start_point.get_z(),
                                          end_point.get_z()));
             }
 
@@ -78,10 +78,10 @@ namespace Geometry {
             }
 
             FloatType length() const {
-                return pow(
-                    pow(start_point.get_x() - end_point.get_x(), 2) +
-                        pow(start_point.get_y() - end_point.get_y(), 2) +
-                        pow(start_point.get_z() - end_point.get_z(), 2),
+                return std::pow(
+                    std::pow(start_point.get_x() - end_point.get_x(), 2) +
+                        std::pow(start_point.get_y() - end_point.get_y(), 2) +
+                        std::pow(start_point.get_z() - end_point.get_z(), 2),
                     0.5);
             }
 
@@ -147,6 +147,8 @@ namespace Geometry {
                     return intersection_with_point(segment.start_point);
                 }
 
+                std::cout << "segment: "<<std::endl;
+
                 std::pair<FloatType, FloatType> params_of_intersection =
                     solve_system_3eq_2var(
                         {start_point.get_x() - end_point.get_x(),
@@ -169,8 +171,8 @@ namespace Geometry {
                 FloatType t = params_of_intersection.first;
                 FloatType s = params_of_intersection.second;
 
-                if (is_double_in_segment(t, 0, 1) &&
-                    is_double_in_segment(s, 0, 1)) {
+                if (is_float_in_segment(t, 0, 1) &&
+                    is_float_in_segment(s, 0, 1)) {
                     return Segment(Point(
                         t * start_point.get_x() + (1 - t) * end_point.get_x(),
                         t * start_point.get_y() + (1 - t) * end_point.get_y(),

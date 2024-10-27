@@ -71,8 +71,8 @@ namespace Geometry {
                         det_two(x, y, vector.x, vector.y)};
             }
 
-            double length() const {
-                return pow(pow(x, 2) + pow(y, 2) + pow(z, 2), 0.5);
+            FloatType length() const {
+                return std::pow(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5);
             }
 
             bool is_codirectional(const Vector& vector) const {
@@ -83,25 +83,25 @@ namespace Geometry {
                                        scalar_product(vector));
             }
 
-            double triple_product(const Vector& a, const Vector& b) const {
+            FloatType triple_product(const Vector& a, const Vector& b) const {
                 return x * det_two(a.y, a.z, b.y, b.z) -
                        y * det_two(a.x, a.z, b.x, b.z) +
                        z * det_two(a.x, a.y, b.x, b.y);
             }
 
-            double vector_module() const {
-                return (pow(pow(x, 2) + pow(y, 2) + pow(z, 2), 0.5));
+            FloatType vector_module() const {
+                return (std::pow(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5));
             }
 
             bool is_collinear(const Vector& vector) const {
-                return (vector_product(vector).vector_module() == 0);
+                return (is_zero(vector_product(vector).vector_module()));
             }
 
             bool is_skew(const Vector& vector) const {
-                return triple_product(vector, {x, y, z}) == 0;
+                return is_zero(triple_product(vector, {x, y, z}));
             }
 
-            double scalar_product(const Vector& vector) const {
+            FloatType scalar_product(const Vector& vector) const {
                 return x * vector.x + y * vector.y + z * vector.z;
             }
 

@@ -5,6 +5,7 @@
 #include <limits>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 namespace Geometry {
     template <typename FloatType>
@@ -69,30 +70,50 @@ namespace Geometry {
     };
 
     template <typename FloatType>
-    bool is_equal_floats(const FloatType a, const FloatType b) {
+    bool is_equal_floats(FloatType a, FloatType b) {
         return (std::fabs(a - b) < Accuracy<FloatType>::get_epsilon());
     }
 
     template <typename FloatType>
-    bool is_zero(const FloatType a) {
+    bool is_zero(FloatType a) {
         return (std::fabs(a) < Accuracy<FloatType>::get_epsilon());
     }
 
     template <typename FloatType>
-    bool is_double_in_segment(FloatType number, FloatType a, FloatType b) {
-        return (std::min(a, b) < number) && (number < std::max(a, b)) ||
+    bool is_bigger(FloatType a, FloatType b) {
+        return (!is_equal_floats(a, b) && a - b > Accuracy<FloatType>::get_epsilon());
+    }
+
+    template <typename FloatType>
+    bool is_bigger_zero(FloatType a) {
+        return (a > Accuracy<FloatType>::get_epsilon());
+    }
+
+    template <typename FloatType>
+    bool is_less(FloatType a, FloatType b) {
+        return (!is_equal_floats(a, b) && a - b < -Accuracy<FloatType>::get_epsilon());
+    }
+
+    template <typename FloatType>
+    bool is_less_zero(FloatType a) {
+        return (a < -Accuracy<FloatType>::get_epsilon());
+    }
+
+    template <typename FloatType>
+    bool is_float_in_segment(FloatType number, FloatType a, FloatType b) {
+        return (is_less(std::min(a, b), number)) && (is_less(number, std::max(a, b))) ||
                is_equal_floats(number, a) || is_equal_floats(number, b);
     }
 
     template <typename FloatType>
-    FloatType det_two(const FloatType a11, const FloatType a12,
-                      const FloatType a21, const FloatType a22) {
+    FloatType det_two(FloatType a11, FloatType a12,
+                      FloatType a21, FloatType a22) {
         return a11 * a22 - a21 * a12;
     }
 
     template <typename FloatType>
     char sign(FloatType number) {
-        return number < 0 ? '-' : '+';
+        return is_less_zero(number) ? '-' : '+';
     }
 
     template <typename FloatType>
@@ -129,8 +150,8 @@ namespace Geometry {
     template <typename FloatType>
     bool is_equal_solutions(std::pair<FloatType, FloatType> solution1,
                             std::pair<FloatType, FloatType> solution2) {
-        return is_equal_floats(solution1.first, solution2.first) &&
-               is_equal_floats(solution1.second, solution2.second);
+        return std::fabs(solution1.first - solution2.first) < 0.5 &&
+               std::fabs(solution1.second - solution2.second) < 0.5;
     }
 
     template <typename FloatType>
@@ -144,6 +165,14 @@ namespace Geometry {
             solve_system_2eq_2var(row2, row3);
         std::pair<FloatType, FloatType> solution13 =
             solve_system_2eq_2var(row1, row3);
+
+        //std::cout << "solutions:" << std::endl;
+        //std::cout << solution12.first << " " << solution12.second <<std::endl;
+        //std::cout << solution23.first << " " << solution23.second <<std::endl;
+        //std::cout << solution13.first << " " << solution13.second <<std::endl;
+        //std::cout << "-------------" << std::endl;
+
+        //std::cout << std::fabs(solution12.first - solution23.first) << std::endl;
 
         if (is_inf_solution(solution12) && is_inf_solution(solution23) &&
             is_inf_solution(solution13))
