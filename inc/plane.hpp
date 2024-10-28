@@ -42,13 +42,9 @@ namespace Geometry {
                                              point2.get_y() - point1.get_y(),
                                              point3.get_x() - point1.get_x(),
                                              point3.get_y() - point1.get_y());
-                //std::cout << point1.get_x() << " " << point1.get_y() << " "
-                //<< point1.get_z() << " " << normal_x << " " << normal_y << " " << normal_z << std::endl; 
-                
+
                 d = -(point1.get_x() * normal_x) -
                     (point1.get_y() * normal_y) - (point1.get_z() * normal_z);
-
-                //std::cout << d << std::endl;
 
                 normal = Vector<FloatType>(normal_x, normal_y, normal_z);
             }
@@ -140,16 +136,6 @@ namespace Geometry {
                      d * normals_scalar_product) /
                     (normals_scalar_product * normals_scalar_product -
                      normal1_length_sqr * normal2_length_sqr);
-
-                //std::cout << plane.d << " " << normal1_length_sqr << " " << d << 
-                //" " << normals_scalar_product<<std::endl; 
-                    
-                //std::cout << (d * normal2_length_sqr -
-                //     plane.d * normals_scalar_product) << " "<< (normals_scalar_product * normals_scalar_product -
-                //     normal1_length_sqr * normal2_length_sqr)<< std::endl;
-                //std::cout << (plane.d * normal1_length_sqr -
-                //     d * normals_scalar_product) << " " << (normals_scalar_product * normals_scalar_product -
-                //     normal1_length_sqr * normal2_length_sqr) << std::endl;
 
                 Vector<FloatType> start_vector = a * normal + b * plane.normal;
                 Line<FloatType> result =

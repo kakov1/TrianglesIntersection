@@ -72,7 +72,8 @@ namespace Geometry {
             }
 
             FloatType length() const {
-                return std::pow(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5);
+                return std::pow(
+                    std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5);
             }
 
             bool is_codirectional(const Vector& vector) const {
@@ -90,7 +91,8 @@ namespace Geometry {
             }
 
             FloatType vector_module() const {
-                return (std::pow(std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5));
+                return (std::pow(
+                    std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2), 0.5));
             }
 
             bool is_collinear(const Vector& vector) const {

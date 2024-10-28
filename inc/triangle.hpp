@@ -123,7 +123,7 @@ namespace Geometry {
                 Point<FloatType> intersection_point_ac =
                     line.lines_intersection(Line<FloatType>{a, c});
 
-                //std::cout << "same_plane" <<std::endl;
+                // std::cout << "same_plane" <<std::endl;
 
                 if (!Segment<FloatType>(a, b).is_point_belong(
                         intersection_point_ab)) {
@@ -140,15 +140,18 @@ namespace Geometry {
 
                 if (!intersection_point_ab.is_equal(Point<FloatType>()) &&
                     !intersection_point_bc.is_equal(Point<FloatType>())) {
-                    return Segment<FloatType>{intersection_point_ab, intersection_point_bc};
+                    return Segment<FloatType>{intersection_point_ab,
+                                              intersection_point_bc};
                 }
                 else if (!intersection_point_bc.is_equal(Point<FloatType>()) &&
                          !intersection_point_ac.is_equal(Point<FloatType>())) {
-                    return Segment<FloatType>{intersection_point_bc, intersection_point_ac};
+                    return Segment<FloatType>{intersection_point_bc,
+                                              intersection_point_ac};
                 }
                 else if (!intersection_point_ab.is_equal(Point<FloatType>()) &&
                          !intersection_point_ac.is_equal(Point<FloatType>())) {
-                    return Segment<FloatType>{intersection_point_ab, intersection_point_ac};
+                    return Segment<FloatType>{intersection_point_ab,
+                                              intersection_point_ac};
                 }
                 return Segment<FloatType>();
             }
@@ -244,7 +247,8 @@ namespace Geometry {
 
                 return (is_bigger_zero(u) || is_zero(u)) &&
                        (is_bigger_zero(v) || is_zero(v)) &&
-                       (is_less(u + v, static_cast<FloatType>(1)) || is_zero(u + v - 1));
+                       (is_less(u + v, static_cast<FloatType>(1)) ||
+                        is_zero(u + v - 1));
             }
 
             bool is_intersect(const Triangle& triangle) const {
@@ -276,8 +280,6 @@ namespace Geometry {
                     else {
                         Line<FloatType> intersection_line =
                             plane.intersection(triangle.plane);
-                        
-                        //intersection_line.print();
 
                         Segment<FloatType> segment1 =
                             intersection_line_in_same_plane(intersection_line);
@@ -285,15 +287,9 @@ namespace Geometry {
                             triangle.intersection_line_in_same_plane(
                                 intersection_line);
 
-                        //if (!segment1.is_nan() && !segment2.is_nan()) {
-                        //    std::cout << "-----";
-                        //    segment1.print();
-                        //    segment2.print();
-                        //    std::cout<<"------";
-                        //}
                         Segment<FloatType> intersection =
                             segment1.collinear_segments_intersection(segment2);
-                       
+
                         if (!intersection.is_equal(Segment<FloatType>())) {
                             return true;
                         }
@@ -320,14 +316,16 @@ namespace Geometry {
                     Vector<FloatType>(a, segment.get_start_point());
 
                 FloatType u = tmp * s.scalar_product(p);
-                if (is_less_zero(u) || is_bigger(u, static_cast<FloatType>(1))) {
+                if (is_less_zero(u) ||
+                    is_bigger(u, static_cast<FloatType>(1))) {
                     return false;
                 }
 
                 Vector<FloatType> q = s.vector_product(e1);
                 FloatType v = tmp * q.scalar_product(p);
 
-                if (is_less_zero(v) || is_bigger(v, static_cast<FloatType>(1))) {
+                if (is_less_zero(v) ||
+                    is_bigger(v, static_cast<FloatType>(1))) {
                     return false;
                 }
 

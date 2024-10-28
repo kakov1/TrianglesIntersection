@@ -81,7 +81,8 @@ namespace Geometry {
 
     template <typename FloatType>
     bool is_bigger(FloatType a, FloatType b) {
-        return (!is_equal_floats(a, b) && a - b > Accuracy<FloatType>::get_epsilon());
+        return (!is_equal_floats(a, b) &&
+                a - b > Accuracy<FloatType>::get_epsilon());
     }
 
     template <typename FloatType>
@@ -91,7 +92,8 @@ namespace Geometry {
 
     template <typename FloatType>
     bool is_less(FloatType a, FloatType b) {
-        return (!is_equal_floats(a, b) && a - b < -Accuracy<FloatType>::get_epsilon());
+        return (!is_equal_floats(a, b) &&
+                a - b < -Accuracy<FloatType>::get_epsilon());
     }
 
     template <typename FloatType>
@@ -101,13 +103,14 @@ namespace Geometry {
 
     template <typename FloatType>
     bool is_float_in_segment(FloatType number, FloatType a, FloatType b) {
-        return (is_less(std::min(a, b), number)) && (is_less(number, std::max(a, b))) ||
+        return (is_less(std::min(a, b), number)) &&
+                   (is_less(number, std::max(a, b))) ||
                is_equal_floats(number, a) || is_equal_floats(number, b);
     }
 
     template <typename FloatType>
-    FloatType det_two(FloatType a11, FloatType a12,
-                      FloatType a21, FloatType a22) {
+    FloatType det_two(FloatType a11, FloatType a12, FloatType a21,
+                      FloatType a22) {
         return a11 * a22 - a21 * a12;
     }
 
@@ -150,8 +153,8 @@ namespace Geometry {
     template <typename FloatType>
     bool is_equal_solutions(std::pair<FloatType, FloatType> solution1,
                             std::pair<FloatType, FloatType> solution2) {
-        return std::fabs(solution1.first - solution2.first) < 0.5 &&
-               std::fabs(solution1.second - solution2.second) < 0.5;
+        return std::fabs(solution1.first - solution2.first) < 0.2 &&
+               std::fabs(solution1.second - solution2.second) < 0.2;
     }
 
     template <typename FloatType>
@@ -165,14 +168,6 @@ namespace Geometry {
             solve_system_2eq_2var(row2, row3);
         std::pair<FloatType, FloatType> solution13 =
             solve_system_2eq_2var(row1, row3);
-
-        //std::cout << "solutions:" << std::endl;
-        //std::cout << solution12.first << " " << solution12.second <<std::endl;
-        //std::cout << solution23.first << " " << solution23.second <<std::endl;
-        //std::cout << solution13.first << " " << solution13.second <<std::endl;
-        //std::cout << "-------------" << std::endl;
-
-        //std::cout << std::fabs(solution12.first - solution23.first) << std::endl;
 
         if (is_inf_solution(solution12) && is_inf_solution(solution23) &&
             is_inf_solution(solution13))

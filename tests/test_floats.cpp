@@ -66,8 +66,8 @@ std::set<size_t> test(int test_number) {
         }
 
         triangles.emplace_back(Geometry::Triangle<float>(triangle_points[0],
-                                                          triangle_points[1],
-                                                          triangle_points[2]),
+                                                         triangle_points[1],
+                                                         triangle_points[2]),
                                i);
     }
 
@@ -109,12 +109,7 @@ TEST(tests, test14) { ASSERT_TRUE(test(14) == get_answer(14)); }
 
 TEST(tests, test15) { ASSERT_TRUE(test(15) == get_answer(15)); }
 
-TEST(tests, test16) { 
-    std::set<size_t> answer = test(16);
-    for (size_t i : answer) {
-        std::cout << i << std::endl;
-    }
-    ASSERT_TRUE(answer == get_answer(16)); }
+TEST(tests, test16) { ASSERT_TRUE(test(16) == get_answer(16)); }
 
 int main(int argc, char* argv[]) {
     ::testing::InitGoogleMock(&argc, argv);
