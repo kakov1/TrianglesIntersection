@@ -117,18 +117,23 @@ namespace Octree {
                  const Cube<FloatType>& region) {
                 region_ = region;
                 triangles_ = objects;
-            }
+                children_.fill(nullptr);
 
-            Node(const Node& node) {
-                if (!node.has_child && node.children_.size() == 0)
-                    return;
-
-                region_ = node.region_;
-                children_ = node.children_;
                 build_tree();
             }
 
-            Node(Node&& node) {
+            Node(const Node& node) {
+                region_ = node.region_;
+
+                triangles_list triangles;
+                node.get_triangles(triangles);
+
+                triangles_ = triangles;
+
+                build_tree();
+            }
+
+            Node(Node&& node) noexcept {
                 std::swap(region_, node.region_);
                 std::swap(triangles_, node.triangles_);
                 std::swap(children_, node.children_);
@@ -137,13 +142,26 @@ namespace Octree {
 
             Node& operator=(const Node& node) {
                 if (this != &node) {
-                    std::swap(*this, node);
+
+                    for (Node* i : children_) {
+                        delete i;
+                    }
+
+                    children_.fill(nullptr);
+
+                    region_ = node.region_;
+
+                    triangles_list triangles;
+                    node.get_triangles(triangles);
+
+                    triangles_ = triangles;
+                    build_tree();
                 }
 
                 return *this;
             }
 
-            Node& operator=(Node&& node) {
+            Node& operator=(Node&& node) noexcept {
                 if (this != &node) {
                     std::swap(region_, node.region_);
                     std::swap(triangles_, node.triangles_);
@@ -155,8 +173,6 @@ namespace Octree {
             }
 
             ~Node() {
-                if (!has_child)
-                    return;
                 for (Node* child : children_) {
                     delete child;
                 }
@@ -210,9 +226,6 @@ namespace Octree {
                         children_[child_num] = create_node(
                             triangles_partition[child_num], cubes[child_num]);
                         children_[child_num]->build_tree();
-                    }
-                    else {
-                        children_[child_num] = nullptr;
                     }
                 }
             }
@@ -291,45 +304,60 @@ namespace Octree {
 
                 return result;
             }
+
+            void get_triangles(triangles_list& triangles) const {
+                triangles.insert(triangles.begin(), triangles_.begin(),
+                                 triangles_.end());
+
+                if (!has_child)
+                    return;
+
+                for (auto i : children_) {
+                    if (i == nullptr)
+                        continue;
+                    i->get_triangles(triangles);
+                }
+            }
     };
 
     template <typename FloatType>
     class Octree {
+            using triangles_list =
+                std::list<std::pair<Triangle<FloatType>, size_t>>;
+
         private:
             Node<FloatType>* root = nullptr;
 
         public:
-            using triangles_list =
-                std::list<std::pair<Triangle<FloatType>, size_t>>;
-
             Octree(const triangles_list& objects,
                    const CubeParams<FloatType>& cube_params) {
                 root = root->create_node(objects, Cube(cube_params));
-                root->build_tree();
             }
 
             Octree(const Octree& tree) {
                 if (tree.root == nullptr)
                     return;
 
-                root = root->create_node(tree.root->triangles_,
-                                         tree.root->region_);
-                root->build_tree();
+                root = root->create_node({}, {});
+                *root = *tree.root;
             }
 
-            Octree(Octree&& tree) { std::swap(root, tree.root_); }
+            Octree(Octree&& tree) noexcept { std::swap(root, tree.root); }
 
             Octree& operator=(const Octree& tree) {
                 if (this != &tree) {
-                    std::swap(*this, tree);
+                    delete root;
+                    root = root->create_node({}, {});
+
+                    *root = *tree.root;
                 }
 
                 return *this;
             }
 
-            Octree& operator=(Octree&& tree) {
+            Octree& operator=(Octree&& tree) noexcept {
                 if (this != &tree) {
-                    std::swap(root, tree.root_);
+                    std::swap(root, tree.root);
                 }
 
                 return *this;
