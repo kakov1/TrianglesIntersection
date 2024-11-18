@@ -102,6 +102,14 @@ namespace Octree {
 
     template <typename FloatType>
     class Node {
+        private:
+            void swap(Node& node) noexcept {
+                std::swap(region_, node.region_);
+                std::swap(triangles_, node.triangles_);
+                std::swap(children_, node.children_);
+                std::swap(has_child, node.has_child);
+            }
+
         public:
             using triangles_list =
                 std::list<std::pair<Triangle<FloatType>, size_t>>;
@@ -134,40 +142,21 @@ namespace Octree {
             }
 
             Node(Node&& node) noexcept {
-                std::swap(region_, node.region_);
-                std::swap(triangles_, node.triangles_);
-                std::swap(children_, node.children_);
-                std::swap(has_child, node.has_child);
+                swap(node);
             }
 
             Node& operator=(const Node& node) {
                 if (this != &node) {
+                    Node<FloatType> tmp{node};
 
-                    for (Node* i : children_) {
-                        delete i;
-                    }
-
-                    children_.fill(nullptr);
-
-                    region_ = node.region_;
-
-                    triangles_list triangles;
-                    node.get_triangles(triangles);
-
-                    triangles_ = triangles;
-                    build_tree();
+                    swap(tmp);
                 }
 
                 return *this;
             }
 
             Node& operator=(Node&& node) noexcept {
-                if (this != &node) {
-                    std::swap(region_, node.region_);
-                    std::swap(triangles_, node.triangles_);
-                    std::swap(children_, node.children_);
-                    std::swap(has_child, node.has_child);
-                }
+                swap(node);
 
                 return *this;
             }
@@ -328,6 +317,10 @@ namespace Octree {
         private:
             Node<FloatType>* root = nullptr;
 
+            void swap(Octree& tree) noexcept {
+                std::swap(root, tree.root);
+            }
+
         public:
             Octree(const triangles_list& objects,
                    const CubeParams<FloatType>& cube_params) {
@@ -342,23 +335,20 @@ namespace Octree {
                 *root = *tree.root;
             }
 
-            Octree(Octree&& tree) noexcept { std::swap(root, tree.root); }
+            Octree(Octree&& tree) noexcept { swap(tree); }
 
             Octree& operator=(const Octree& tree) {
                 if (this != &tree) {
-                    delete root;
-                    root = root->create_node({}, {});
+                    Octree<FloatType> tmp{tree};
 
-                    *root = *tree.root;
+                    swap(tmp);
                 }
 
                 return *this;
             }
 
             Octree& operator=(Octree&& tree) noexcept {
-                if (this != &tree) {
-                    std::swap(root, tree.root);
-                }
+                swap(tree);
 
                 return *this;
             }

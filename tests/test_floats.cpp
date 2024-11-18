@@ -1,7 +1,7 @@
 #include "octree.hpp"
 #include <fstream>
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <list>
 #include <set>
 #include <vector>
