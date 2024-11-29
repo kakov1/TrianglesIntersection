@@ -57,8 +57,6 @@ int main() {
         triangles,
         Octree::CubeParams{x_min, y_min, z_min, x_max, y_max, z_max});
 
-    Octree::Octree<double> tree1 = tree;
-
     std::set<size_t> res = tree.get_intersections();
 
     if (res.size() != 0) {

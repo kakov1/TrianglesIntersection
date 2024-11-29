@@ -9,6 +9,7 @@
 #include <deque>
 #include <list>
 #include <set>
+#include <memory>
 
 namespace Octree {
 
@@ -94,12 +95,13 @@ namespace Octree {
 
 	template <typename FloatType>
 	class Octree {
-		public:
+		private:
+
+		class Node;
 
 		using triangles_list =
 			std::list<std::pair<Triangle<FloatType>, size_t>>;
-
-		private:
+		using NodePtr = std::shared_ptr<Node>;
 
 		class Node {
 			private:
@@ -108,7 +110,7 @@ namespace Octree {
 
 			Cube<FloatType> region_;
 			triangles_list triangles_;
-			std::array<Node*, 8> children_;
+			std::array<NodePtr, 8> children_;
 			bool has_child = false;
 
 			void build_tree() {
@@ -148,7 +150,7 @@ namespace Octree {
 				for (int child_num = 0; child_num < 8; child_num++) {
 					if (!triangles_partition[child_num].empty()) {
 						has_child = true;
-						children_[child_num] = new Node(
+						children_[child_num] = std::make_shared<Node>(
 							triangles_partition[child_num], cubes[child_num]);
 						children_[child_num]->build_tree();
 					}
@@ -176,7 +178,7 @@ namespace Octree {
 
 			void get_intersections_with_child(std::set<size_t>& result,
 											  const triangles_list& triangles,
-											  const Node* child) const {
+											  const NodePtr& child) const {
 				if (child == nullptr || child->triangles_.empty())
 					return;
 
@@ -197,7 +199,7 @@ namespace Octree {
 				const triangles_list& triangles) const {
 				if (!has_child)
 					return;
-				for (Node* child : children_) {
+				for (auto &child : children_) {
 					if (child == nullptr)
 						continue;
 
@@ -266,11 +268,7 @@ namespace Octree {
 				return *this;
 			}
 
-			~Node() {
-				for (Node* child : children_) {
-					delete child;
-				}
-			}
+			~Node() = default;
 
 			std::set<size_t> get_intersections() const {
 				if ((triangles_.empty()) && !has_child) {
@@ -284,7 +282,7 @@ namespace Octree {
 
 				if (!has_child)
 					return result;
-				for (Node* child : children_) {
+				for (auto &child : children_) {
 					if (!child)
 						continue;
 					std::set<size_t> result_child = child->get_intersections();
@@ -297,7 +295,7 @@ namespace Octree {
 			}
 		};
 
-		Node* root = nullptr;
+		NodePtr root = nullptr;
 
 		void swap(Octree& tree) noexcept { std::swap(root, tree.root); }
 
@@ -305,15 +303,14 @@ namespace Octree {
 
 		Octree(const triangles_list& triangles,
 			   const CubeParams<FloatType>& region) {
-			root = new Node(triangles, region);
+			root = std::make_shared<Node>(triangles, region);
 		}
 
 		Octree(const Octree& tree) {
 			if (tree.root == nullptr)
 				return;
 
-			root = new Node({}, {});
-			*root = *tree.root;
+			root = std::make_shared<Node>(tree.root.trinagles, tree.root.triangles);
 		}
 
 		Octree(Octree&& tree) noexcept { swap(tree); }
@@ -334,7 +331,7 @@ namespace Octree {
 			return *this;
 		}
 
-		~Octree() { delete root; }
+		~Octree() = default;
 
 		std::set<size_t> get_intersections() const {
 			return root->get_intersections();
